@@ -1,0 +1,6 @@
+<mvc:View controllerName="eventui.controller.CreateEvent"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="create_event" title="{i18n>title}">
+    </Page>
+</mvc:View>

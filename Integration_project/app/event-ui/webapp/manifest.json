@@ -1,0 +1,121 @@
+{
+  "_version": "1.83.0",
+  "sap.app": {
+    "id": "eventui",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/admin/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.01"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.145.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "eventui.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "type": "View",
+        "viewType": "XML",
+        "async": true,
+        "transition": "slide",
+        "controlId": "app",
+        "controlAggregation": "pages"
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "events",
+          "target": "Events"
+        },
+        {
+          "pattern": "event/{eventId}",
+          "name": "eventDetail",
+          "target": "EventDetail"
+        },
+        {
+          "pattern": "create",
+          "name": "createEvent",
+          "target": "CreateEvent"
+        }
+      ],
+      "targets": {
+        "Events": {
+          "id": "events",
+          "viewType": "XML",
+          "viewName": "eventui.view.Events"
+        },
+        "CreateEvent": {
+          "id": "createEvent",
+          "viewType": "XML",
+          "viewName": "eventui.view.CreateEvent"
+        },
+        "EventDetail": {
+          "id": "eventDetail",
+          "viewType": "XML",
+          "viewName": "eventui.view.EventDetail"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "eventui.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  }
+}

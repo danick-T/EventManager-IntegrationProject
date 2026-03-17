@@ -1,0 +1,4 @@
+ID,name,description,location,startDate,endDate,active
+11111111,SAP Tech Day,Technology event about SAP,Berlin,2026-04-10T09:00:00,2026-04-10T18:00:00,true
+22222222,AI Innovation Summit,AI conference for enterprises,Brussels,2026-05-15T09:00:00,2026-05-15T17:00:00,true
+33333333,Cloud Transformation Event,Cloud adoption strategies,Amsterdam,2026-06-20T09:00:00,2026-06-20T17:00:00,true

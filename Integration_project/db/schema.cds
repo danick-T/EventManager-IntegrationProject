@@ -5,8 +5,10 @@ entity Events {
     name            : String(100);
     description     : String(500);
     location        : String(100);
-    date            : Date;
+    startDate       : Timestamp;
+    endDate         : Timestamp;
     active          : Boolean;
+
     sessions        : Composition of many Sessions
                       on sessions.event = $self;
 }
@@ -18,9 +20,14 @@ entity Sessions {
     startTime       : Timestamp;
     endTime         : Timestamp;
     speaker         : String(100);
+    room            : String(50);
+    capacity        : Integer;
+
     event           : Association to Events;
+
     registrations   : Composition of many Registrations
                       on registrations.session = $self;
+
     feedback        : Composition of many Feedback
                       on feedback.session = $self;
 }
@@ -29,8 +36,9 @@ entity Registrations {
     key ID          : UUID;
     userName        : String(100);
     email           : String(100);
-    session         : Association to Sessions;
     registeredAt    : Timestamp;
+
+    session         : Association to Sessions;
 }
 
 entity Feedback {
@@ -38,6 +46,8 @@ entity Feedback {
     rating          : Integer;
     comment         : String(500);
     userName        : String(100);
-    session         : Association to Sessions;
+    email           : String(100);
     createdAt       : Timestamp;
+
+    session         : Association to Sessions;
 }

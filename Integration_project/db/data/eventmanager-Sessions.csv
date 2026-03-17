@@ -1,0 +1,5 @@
+ID,title,description,startTime,endTime,speaker,room,capacity,event_ID
+aaaa1111,Introduction to SAP CAP,Learn CAP basics,2026-04-10T09:00:00,2026-04-10T10:00:00,Jan Peeters,A1,40,11111111
+aaaa2222,Building SAP UI5 Apps,UI5 development,2026-04-10T10:30:00,2026-04-10T11:30:00,Sarah Jacobs,A2,30,11111111
+bbbb1111,AI in Business,Using AI in companies,2026-05-15T09:00:00,2026-05-15T10:30:00,Tom Janssen,B1,50,22222222
+bbbb2222,Machine Learning Basics,ML introduction,2026-05-15T11:00:00,2026-05-15T12:30:00,Emma Claes,B2,40,22222222
