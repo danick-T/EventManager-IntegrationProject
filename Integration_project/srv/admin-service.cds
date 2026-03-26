@@ -1,8 +1,15 @@
 using { eventmanager as db } from '../db/schema';
 
 service AdminService {
+  entity Events as projection on db.Events;
+  entity Sessions as projection on db.Sessions;
+  entity Registrations as projection on db.Registrations;
+  entity Feedback as projection on db.Feedback;
 
-  @restrict: [{ grant: '*', to: 'Admin' }]
+}
+
+/**
+ *@restrict: [{ grant: '*', to: 'Admin' }]
   entity Events as projection on db.Events;
 
   @restrict: [{ grant: '*', to: 'Admin' }]
@@ -13,5 +20,4 @@ service AdminService {
 
   @restrict: [{ grant: 'READ', to: 'Admin' }]
   entity Feedback as projection on db.Feedback;
-
-}
+ */
