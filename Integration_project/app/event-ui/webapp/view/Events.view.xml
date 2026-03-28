@@ -146,7 +146,7 @@
                                     type="Transparent"
                                     icon="sap-icon://slim-arrow-right"
                                     iconFirst="false"
-                                    press=".onViewDetails"/>
+                                    press=".onOpenSessionRegistration"/>
 
                             </cells>
                         </ColumnListItem>
