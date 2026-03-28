@@ -1,0 +1,58 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form">
+
+    <Dialog id="sessionRegistrationDialog" 
+            title="Session Registration" 
+            contentWidth="500px">
+        <content>
+            <VBox class="sapUiSmallMargin">
+                <Panel>
+                    <Text text="CONFIRMING REGISTRATION FOR" />
+                    <Title text="{sessionName}" level="H4" />
+                    <Text text="{eventName}" />
+
+                    <HBox alignItems="Center" class="sapUiTinyMarginTop">
+                        <core:Icon src="sap-icon://appointment-2" class="sapUiTinyMarginEnd"/>
+                        <Text text="{eventDate}"/>
+                        <core:Icon src="sap-icon://locate-me" class="sapUiSmallMarginBegin sapUiTinyMarginEnd"/>
+                        <Text text="{eventLocation}"/>
+                    </HBox>
+                </Panel>
+
+                <f:SimpleForm id="SimpleFormRegistration"
+                    editable="true"
+                    layout="ResponsiveGridLayout"
+                    labelSpanL="3"
+                    labelSpanM="4"
+                    emptySpanL="1">
+                    <f:toolbar>
+                        <Toolbar id="SessionRegToolbar">
+                            <Title text="Your Details"/>
+                        </Toolbar>
+                    </f:toolbar>
+                    <f:content>
+                        <Label text="First Name" required="true" />
+                        <Input placeholder="eg. Max" value="{registration>/firstName}" />
+                        
+                        <Label text="Last Name" required="true" />
+                        <Input placeholder="eg. Verstappen" value="{registration>/lastName}" />
+
+                        <Label text="Email Address" required="true" />
+                        <Input placeholder="alex.rivera@company.com" 
+                               value="{registration>/email}"
+                               type="Email" />
+
+                        <Label text="" />
+                        <CheckBox text="I agree to the corporate event guidelines." />
+                    </f:content>
+                </f:SimpleForm>
+            </VBox>
+        </content>
+        <buttons>
+            <Button id="cancel" text="Cancel" press=".onCloseRegistration" />
+            <Button id="saveRegistration" text="Confirm Registration" type="Emphasized" press=".onSaveRegistration" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

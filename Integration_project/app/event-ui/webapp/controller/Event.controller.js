@@ -93,6 +93,18 @@ sap.ui.define([
 
         onSearch: function () {
             this.byId("searchField").focus();
+        },
+        // deze moet ik de session details pagina komen !
+        onOpenSessionRegistration: function () {
+            if (!this._oDialog) {
+                this._oDialog = sap.ui.xmlfragment(
+                    "eventui.view.UserSessionRegistration", // pad naar je view
+                    this
+                );
+                this.getView().addDependent(this._oDialog);
+            }
+
+            this._oDialog.open();
         }
 
     });

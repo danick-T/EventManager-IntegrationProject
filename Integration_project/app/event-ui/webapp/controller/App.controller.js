@@ -15,7 +15,7 @@ sap.ui.define([
             var oUserModel = new JSONModel({
                 name:     "Alex Rivera",
                 role:     "Admin",
-                initials: "AR"
+                initials: "ALEx R"
             });
             this.getOwnerComponent().setModel(oUserModel, "user");
         }
