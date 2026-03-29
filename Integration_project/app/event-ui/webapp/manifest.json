@@ -18,6 +18,14 @@
           "annotations": [],
           "odataVersion": "4.01"
         }
+      },
+      "eventService": {
+        "uri": "/odata/v4/event/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.01"
+        }
       }
     }
   },
@@ -51,6 +59,15 @@
       },
       "": {
         "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "eventService": {
+        "dataSource": "eventService",
         "preload": true,
         "settings": {
           "operationMode": "Server",
@@ -91,6 +108,11 @@
           "pattern": "create",
           "name": "createEvent",
           "target": "CreateEvent"
+        },
+        {
+          "pattern": "my-sessions",
+          "name": "userSessions",
+          "target": "UserSessions"
         }
       ],
       "targets": {
@@ -108,6 +130,11 @@
           "id": "eventDetail",
           "viewType": "XML",
           "viewName": "eventui.view.EventDetail"
+        },
+        "UserSessions": {
+          "id": "userSessions",
+          "viewType": "XML",
+          "viewName": "eventui.view.UserSession"
         }
       }
     },

@@ -1,20 +1,22 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "eventui/controller/BaseController",
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "eventui/model/formatter"
-], function (Controller, JSONModel, Filter, FilterOperator, formatter) {
+], function (BaseController, JSONModel, Filter, FilterOperator, formatter) {
     "use strict";
 
-    return Controller.extend("eventui.controller.Event", {
+    return BaseController.extend("eventui.controller.Event", {
 
         formatter: formatter,
 
         onInit: function () {
-            // OData model → manifest.json (mainService → /odata/v4/admin/)
-            // user model  → App.controller.js (gezet op component, beschikbaar in alle views)
+            const oPage = this.byId("eventsPage");
+            this._loadHeader(oPage, "events");
+            this._loadFooter(oPage);
             this._loadFiltersModel();
+            this._attachRouteMatched("events", "events");
         },
 
         _loadFiltersModel: function () {
@@ -70,42 +72,36 @@ sap.ui.define([
         onTableUpdateFinished: function (oEvent) {
             var iTotal   = oEvent.getParameter("total");
             var iCurrent = oEvent.getParameter("actual");
-            this.byId("tableCountText").setText("Showing " + iCurrent + " of " + iTotal + " events");
+            this.byId("tableCountText").setText(
+                "Showing " + iCurrent + " of " + iTotal + " events"
+            );
         },
 
         onViewDetails: function (oEvent) {
             var oContext = oEvent.getSource().getBindingContext();
             var sId      = oContext.getObject().ID;
-            this.getOwnerComponent().getRouter().navTo("eventDetail", {
+            this.getRouter().navTo("eventDetail", {
                 eventId: encodeURIComponent(sId)
             });
         },
 
-        onNavSelect: function (oEvent) {
-            if (oEvent.getParameter("key") === "sessions") {
-                sap.m.MessageToast.show("My Sessions coming soon!");
-            }
-        },
-
         onRequestEvent: function () {
-            this.getOwnerComponent().getRouter().navTo("createEvent");
+            this.getRouter().navTo("createEvent");
         },
 
         onSearch: function () {
             this.byId("searchField").focus();
         },
-        // deze moet ik de session details pagina komen !
+
         onOpenSessionRegistration: function () {
             if (!this._oDialog) {
                 this._oDialog = sap.ui.xmlfragment(
-                    "eventui.view.UserSessionRegistration", // pad naar je view
+                    "eventui.view.UserSessionRegistration",
                     this
                 );
                 this.getView().addDependent(this._oDialog);
             }
-
             this._oDialog.open();
         }
-
     });
 });
