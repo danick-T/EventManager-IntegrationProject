@@ -5,52 +5,18 @@
     displayBlock="true">
 
     <Page id="eventsPage" enableScrolling="true">
-
-        <customHeader>
-            <Bar>
-                <contentLeft>
-                    <HBox alignItems="Center">
-                        <core:Icon src="sap-icon://calendar" size="1.5rem" class="sapUiSmallMarginEnd"/>
-                        <Title text="EventSphere" level="H4"/>
-                    </HBox>
-                </contentLeft>
-                <contentMiddle>
-                    <IconTabBar
-                        id="mainNavBar"
-                        expanded="true"
-                        backgroundDesign="Transparent"
-                        select=".onNavSelect">
-                        <items>
-                            <IconTabFilter text="{i18n>navEvents}"   key="events" selected="true"/>
-                            <IconTabFilter text="{i18n>navSessions}" key="sessions"/>
-                        </items>
-                    </IconTabBar>
-                </contentMiddle>
-                <contentRight>
-                    <Button icon="sap-icon://search"          press=".onSearch"/>
-                    <Button icon="sap-icon://bell"/>
-                    <Button icon="sap-icon://action-settings"/>
-                    <Avatar initials="{user>/initials}" displaySize="XS"/>
-                    <Text text="{user>/name}" class="sapUiSmallMarginBegin"/>
-                </contentRight>
-            </Bar>
-        </customHeader>
-
         <content>
             <VBox class="sapUiMediumMargin">
 
-                <!-- Breadcrumb -->
                 <Breadcrumbs>
                     <Link text="{i18n>breadcrumbHome}"/>
                     <Link text="{i18n>breadcrumbEvents}"/>
                 </Breadcrumbs>
 
-                <!-- Paginatitel -->
                 <Title text="{i18n>pageTitle}" level="H1"
                     class="sapUiSmallMarginTop sapUiSmallMarginBottom"/>
                 <Text text="{i18n>pageSubtitle}" class="sapUiSmallMarginBottom"/>
 
-                <!-- Filterpaneel -->
                 <Panel expandable="false" expanded="true" class="sapUiSmallMarginBottom">
                     <headerToolbar>
                         <Toolbar>
@@ -82,7 +48,6 @@
                     </content>
                 </Panel>
 
-                <!-- Events tabel — bindt op /Events via AdminService (/odata/v4/admin/) -->
                 <Table
                     id="eventsTable"
                     items="{
@@ -161,13 +126,11 @@
 
                 </Table>
 
-                <!-- Teller -->
                 <HBox justifyContent="Start" alignItems="Center"
                     class="sapUiSmallMarginTop sapUiSmallMarginBottom">
                     <Text id="tableCountText" text=""/>
                 </HBox>
 
-                <!-- Call-to-action -->
                 <VBox alignItems="Center" class="sapUiLargeMarginTop sapUiLargeMarginBottom">
                     <core:Icon src="sap-icon://calendar" size="3rem" color="#0070F2"
                         class="sapUiSmallMarginBottom"/>
@@ -179,21 +142,6 @@
 
             </VBox>
         </content>
-
-        <footer>
-            <Bar>
-                <contentLeft>
-                    <Text text="© 2024 EventSphere Enterprise"/>
-                    <Link text="{i18n>privacyPolicy}"  class="sapUiSmallMarginBegin"/>
-                    <Link text="{i18n>termsOfService}" class="sapUiSmallMarginBegin"/>
-                </contentLeft>
-                <contentRight>
-                    <core:Icon src="sap-icon://status-positive" color="green"/>
-                    <Text text="System Status: Operational" class="sapUiTinyMarginBegin"/>
-                </contentRight>
-            </Bar>
-        </footer>
-
     </Page>
 
 </mvc:View>

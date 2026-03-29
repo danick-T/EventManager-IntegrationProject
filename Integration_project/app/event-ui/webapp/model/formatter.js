@@ -14,43 +14,25 @@ sap.ui.define([], function () {
     }
 
     return {
-
-        /**
-         * Timestamp → "10 Apr 2026"
-         */
-        formatDate: function (sTimestamp) {
-            if (!sTimestamp) { return ""; }
-            return new Date(sTimestamp).toLocaleDateString("en-GB", {
-                day:   "2-digit",
-                month: "short",
-                year:  "numeric"
+        formatDate(sValue) {
+            if (!sValue) return "";
+            return new Date(sValue).toLocaleDateString('nl-BE', {
+                day: '2-digit', month: 'short', year: 'numeric'
             });
         },
-
-        /**
-         * Einddatum met "to" prefix, of leeg
-         */
-        formatDateEnd: function (sTimestamp) {
-            if (!sTimestamp) { return ""; }
-            return "to " + new Date(sTimestamp).toLocaleDateString("en-GB", {
-                day:   "2-digit",
-                month: "short",
-                year:  "numeric"
+        formatTimeRange(sStart, sEnd) {
+            if (!sStart || !sEnd) return "";
+            const fmt = v => new Date(v).toLocaleTimeString('nl-BE', {
+                hour: '2-digit', minute: '2-digit'
             });
+            return `${fmt(sStart)} – ${fmt(sEnd)}`;
         },
 
-        /**
-         * Statustekst afgeleid van active + datums
-         * "Active" | "Upcoming" | "Closed" | "Inactive"
-         */
+
         formatStatusText: function (bActive, sStartDate, sEndDate) {
             return _deriveStatus(bActive, sStartDate, sEndDate);
         },
 
-        /**
-         * ObjectStatus state afgeleid van active + datums
-         * "Success" | "Information" | "Error" | "None"
-         */
         formatStatusState: function (bActive, sStartDate, sEndDate) {
             var mMap = {
                 "Active":   "Success",
@@ -61,13 +43,9 @@ sap.ui.define([], function () {
             return mMap[_deriveStatus(bActive, sStartDate, sEndDate)] || "None";
         },
 
-        /**
-         * UUID → "#11111111"
-         */
         formatEventId: function (sId) {
             if (!sId) { return ""; }
             return "#" + sId.substring(0, 8).toUpperCase();
         }
-
     };
 });

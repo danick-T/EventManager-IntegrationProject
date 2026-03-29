@@ -1,0 +1,74 @@
+<mvc:View controllerName="eventui.controller.UserSession"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    displayBlock="true">
+    <Page id="userSessions" enableScrolling="true" >
+        <Title text="My Registerd Sessions" level="H1"
+            class="sapUiSmallMarginTop sapUiSmallMarginBottom"/>
+        <Text text="Keep track of your scheduled corporate events and provide valuable feedback for completed sessions." 
+        class="sapUiSmallMarginBottom"/>
+
+        <IconTabBar id="sessionTabBar" select="onToggleTab">
+            <items>
+                <IconTabFilter text="Upcoming Sessions" key="upcoming"/>
+                <IconTabFilter text="Past Sessions" key="past"/>
+            </items>
+            <content>
+                <Table
+                    id="sessionsTable"
+                    items="{
+                        path: '/Sessions',
+                        parameters: {
+                            $expand: 'event',
+                            $orderby: 'startTime asc'
+                        }
+                    }" 
+                >
+                    <columns>
+                        <Column width="15%"><Text text="Event Name"/></Column>
+                        <Column width="20%"><Text text="Session Name"/></Column>
+                        <Column width="15%"><Text text="Date &amp; Time"/></Column>
+                        <Column width="20%"><Text text="status"/></Column>
+                        <Column width="5%"> <Text text="Feedback"/></Column>
+                        <Column width="18%" hAlign="End"><Text text="Actions"/></Column>
+                    </columns>
+
+                    <items>
+                        <ColumnListItem >
+                            <cells>
+                                <Text text="{event/name}"/>
+                                <Text text="{title}"/>
+                                <VBox>
+                                    <HBox >
+                                    <core:Icon src="sap-icon://calendar" class="sapUiTinyMarginEnd"/>
+                                        <Text text="{
+                                            path: 'startTime',
+                                            targetType: 'any',
+                                            formatter: '.formatter.formatDate'
+                                        }"/>
+                                    </HBox>
+                                    <HBox >
+                                        <core:Icon src="sap-icon://in-progress" class="sapUiTinyMarginEnd"/>
+                                        <Text text="{
+                                            parts: [
+                                                { path: 'startTime', targetType: 'any' },
+                                                { path: 'endTime',   targetType: 'any' }
+                                            ],
+                                            formatter: '.formatter.formatTimeRange'
+                                        }"/>
+                                    </HBox>                         
+                                </VBox>
+                                <ObjectStatus text="Confirmed" state="Success"/>
+
+                                <Text text="–"/>
+
+                                <Button text="View Details" press="handleViewDeatils"></Button>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </content>
+        </IconTabBar>
+    </Page>
+</mvc:View>
