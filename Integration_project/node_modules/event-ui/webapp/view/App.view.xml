@@ -1,0 +1,10 @@
+<mvc:View
+    controllerName="eventui.controller.App"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    displayBlock="true">
+
+    <!-- Router laadt hier alle pagina's -->
+    <App id="app"/>
+
+</mvc:View>
