@@ -19,15 +19,16 @@
                         id="mainNavBar"
                         expanded="true"
                         backgroundDesign="Transparent"
-                        select=".onNavSelect">
+                        select=".onNavSelect"
+                        selectedKey="events">
                         <items>
-                            <IconTabFilter text="{i18n>navEvents}"   key="events" selected="true"/>
+                            <IconTabFilter text="{i18n>navEvents}" key="events"/>
                             <IconTabFilter text="{i18n>navSessions}" key="sessions"/>
                         </items>
                     </IconTabBar>
                 </contentMiddle>
                 <contentRight>
-                    <Button icon="sap-icon://search"          press=".onSearch"/>
+                    <Button icon="sap-icon://search" press=".onSearch"/>
                     <Button icon="sap-icon://bell"/>
                     <Button icon="sap-icon://action-settings"/>
                     <Avatar initials="{user>/initials}" displaySize="XS"/>
@@ -146,7 +147,7 @@
                                     type="Transparent"
                                     icon="sap-icon://slim-arrow-right"
                                     iconFirst="false"
-                                    press=".onOpenSessionRegistration"/>
+                                    press=".onViewDetails"/>
 
                             </cells>
                         </ColumnListItem>
