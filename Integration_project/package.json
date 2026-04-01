@@ -15,7 +15,8 @@
   "scripts": {
     "start": "cds-serve",
     "watch-project1": "cds watch --open project1/index.html?sap-ui-xx-viewCache=false --livereload false",
-    "watch-event-ui": "cds watch --open eventui/index.html?sap-ui-xx-viewCache=false --livereload false"
+    "watch-event-ui": "cds watch --open eventui/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch": "cds watch"
   },
   "cds": {
     "requires": {
