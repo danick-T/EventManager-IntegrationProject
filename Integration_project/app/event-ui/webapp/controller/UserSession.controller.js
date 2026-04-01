@@ -40,7 +40,17 @@ sap.ui.define([
             var oContext = oEvent.getSource().getBindingContext();
             var oSession = oContext.getObject();
             console.log("Details voor sessie:", oSession.ID, oSession.title);
+        },
+
+        handleGiveFeedback: function (oEvent) {
+            var oContext = oEvent.getSource().getBindingContext();
+            var oSession = oContext.getObject();
+
+            this.getRouter().navTo("feedback", {
+                sessionId: oSession.ID
+            });
         }
+
 
     });
 });

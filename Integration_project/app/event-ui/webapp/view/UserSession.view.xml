@@ -30,7 +30,7 @@
                         <Column width="20%"><Text text="Session Name"/></Column>
                         <Column width="15%"><Text text="Date &amp; Time"/></Column>
                         <Column width="20%"><Text text="status"/></Column>
-                        <Column width="5%"> <Text text="Feedback"/></Column>
+                        <Column width="10%"> <Text text="Feedback"/></Column>
                         <Column width="18%" hAlign="End"><Text text="Actions"/></Column>
                     </columns>
 
@@ -61,7 +61,14 @@
                                 </VBox>
                                 <ObjectStatus text="Confirmed" state="Success"/>
 
-                                <Text text="–"/>
+                                <Button 
+                                text="Give Feedback" 
+                                type="Emphasized"
+                                visible="{
+                                    path: 'startTime',
+                                    formatter: '.formatter.isPastSession'
+                                }"
+                                press="handleGiveFeedback"/>
 
                                 <Button text="View Details" press="handleViewDeatils"></Button>
                             </cells>

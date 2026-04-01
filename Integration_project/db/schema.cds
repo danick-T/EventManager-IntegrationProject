@@ -41,6 +41,7 @@ entity Registrations {
     session         : Association to Sessions;
 }
 
+
 entity Feedback {
     key ID          : UUID;
     rating          : Integer;
