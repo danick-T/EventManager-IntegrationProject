@@ -8,4 +8,3 @@ gen/
 docs/
 *.log
 npm-debug.log*
-.cds-dxfn-*

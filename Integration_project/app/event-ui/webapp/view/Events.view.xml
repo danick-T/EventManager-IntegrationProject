@@ -1,4 +1,4 @@
-<mvc:View controllerName="eventui.controller.Event"
+<mvc:View controllerName="eventui.controller.Events"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:core="sap.ui.core"
@@ -40,18 +40,15 @@
         <content>
             <VBox class="sapUiMediumMargin">
 
-                <!-- Breadcrumb -->
                 <Breadcrumbs>
                     <Link text="{i18n>breadcrumbHome}"/>
                     <Link text="{i18n>breadcrumbEvents}"/>
                 </Breadcrumbs>
 
-                <!-- Paginatitel -->
                 <Title text="{i18n>pageTitle}" level="H1"
                     class="sapUiSmallMarginTop sapUiSmallMarginBottom"/>
                 <Text text="{i18n>pageSubtitle}" class="sapUiSmallMarginBottom"/>
 
-                <!-- Filterpaneel -->
                 <Panel expandable="false" expanded="true" class="sapUiSmallMarginBottom">
                     <headerToolbar>
                         <Toolbar>
@@ -83,7 +80,6 @@
                     </content>
                 </Panel>
 
-                <!-- Events tabel — bindt op /Events via AdminService (/odata/v4/admin/) -->
                 <Table
                     id="eventsTable"
                     items="{
@@ -162,13 +158,11 @@
 
                 </Table>
 
-                <!-- Teller -->
                 <HBox justifyContent="Start" alignItems="Center"
                     class="sapUiSmallMarginTop sapUiSmallMarginBottom">
                     <Text id="tableCountText" text=""/>
                 </HBox>
 
-                <!-- Call-to-action -->
                 <VBox alignItems="Center" class="sapUiLargeMarginTop sapUiLargeMarginBottom">
                     <core:Icon src="sap-icon://calendar" size="3rem" color="#0070F2"
                         class="sapUiSmallMarginBottom"/>
@@ -180,21 +174,6 @@
 
             </VBox>
         </content>
-
-        <footer>
-            <Bar>
-                <contentLeft>
-                    <Text text="© 2024 EventSphere Enterprise"/>
-                    <Link text="{i18n>privacyPolicy}"  class="sapUiSmallMarginBegin"/>
-                    <Link text="{i18n>termsOfService}" class="sapUiSmallMarginBegin"/>
-                </contentLeft>
-                <contentRight>
-                    <core:Icon src="sap-icon://status-positive" color="green"/>
-                    <Text text="System Status: Operational" class="sapUiTinyMarginBegin"/>
-                </contentRight>
-            </Bar>
-        </footer>
-
     </Page>
 
 </mvc:View>
