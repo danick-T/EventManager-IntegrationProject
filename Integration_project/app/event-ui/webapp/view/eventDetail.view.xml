@@ -39,7 +39,7 @@
                     </f:SimpleForm>
                 </Panel>
                 <Panel headerText="Sessions" class="sapUiSmallMarginBottom">
-                    <Table id="sessionsTable" items="{sessions}" growing="true"
+                    <Table id="eventDetailSessionsTable" items="{sessions}" growing="true"
                         growingThreshold="10" noDataText="No sessions available for this event.">
                         <columns>
                             <Column>

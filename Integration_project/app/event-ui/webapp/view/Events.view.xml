@@ -6,36 +6,6 @@
 
     <Page id="eventsPage" enableScrolling="true">
 
-        <customHeader>
-            <Bar>
-                <contentLeft>
-                    <HBox alignItems="Center">
-                        <core:Icon src="sap-icon://calendar" size="1.5rem" class="sapUiSmallMarginEnd"/>
-                        <Title text="EventSphere" level="H4"/>
-                    </HBox>
-                </contentLeft>
-                <contentMiddle>
-                    <IconTabBar
-                        id="mainNavBar"
-                        expanded="true"
-                        backgroundDesign="Transparent"
-                        select=".onNavSelect"
-                        selectedKey="events">
-                        <items>
-                            <IconTabFilter text="{i18n>navEvents}" key="events"/>
-                            <IconTabFilter text="{i18n>navSessions}" key="sessions"/>
-                        </items>
-                    </IconTabBar>
-                </contentMiddle>
-                <contentRight>
-                    <Button icon="sap-icon://search" press=".onSearch"/>
-                    <Button icon="sap-icon://bell"/>
-                    <Button icon="sap-icon://action-settings"/>
-                    <Avatar initials="{user>/initials}" displaySize="XS"/>
-                    <Text text="{user>/name}" class="sapUiSmallMarginBegin"/>
-                </contentRight>
-            </Bar>
-        </customHeader>
 
         <content>
             <VBox class="sapUiMediumMargin">
