@@ -12,8 +12,6 @@ sap.ui.define([
         formatter: formatter,
 
         onInit: function () {
-            // OData model → manifest.json (mainService → /odata/v4/admin/)
-            // user model  → App.controller.js (gezet op component, beschikbaar in alle views)
             this._loadFiltersModel();
         },
 
