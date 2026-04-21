@@ -63,7 +63,7 @@
 
                                 <Text text="–"/>
 
-                                <Button text="View Details" press="handleViewDeatils"></Button>
+                                <Button text="Give Feedback" press="handleViewDetails"></Button>
                             </cells>
                         </ColumnListItem>
                     </items>

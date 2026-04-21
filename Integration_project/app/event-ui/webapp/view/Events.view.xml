@@ -6,7 +6,6 @@
 
     <Page id="eventsPage" enableScrolling="true">
 
-
         <content>
             <VBox class="sapUiMediumMargin">
 

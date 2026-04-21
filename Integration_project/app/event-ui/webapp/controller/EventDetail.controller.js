@@ -23,12 +23,39 @@ sap.ui.define([
             var sEventId = decodeURIComponent(oArgs.eventId);
 
             var oView = this.getView();
+            oView.setModel(new JSONModel({ items: [] }), "feedbackList");
+
             oView.bindElement({
                 path: "/Events(" + sEventId + ")",
                 parameters: {
-                    $expand: "sessions"
+                    $expand: "sessions($expand=feedback)"
+                },
+                events: {
+                    dataReceived: this._onDataReceived.bind(this)
                 }
             });
+        },
+
+        _onDataReceived: function () {
+            var oContext = this.getView().getBindingContext();
+            if (!oContext) { return; }
+
+            var oData = oContext.getObject();
+            var aFeedback = [];
+
+            (oData.sessions || []).forEach(function (oSession) {
+                (oSession.feedback || []).forEach(function (oFb) {
+                    aFeedback.push({
+                        sessionTitle: oSession.title,
+                        userName:     oFb.userName  || "Anonymous",
+                        rating:       oFb.rating    || 0,
+                        comment:      oFb.comment   || "",
+                        createdAt:    oFb.createdAt || ""
+                    });
+                });
+            });
+
+            this.getView().getModel("feedbackList").setProperty("/items", aFeedback);
         },
 
         /**

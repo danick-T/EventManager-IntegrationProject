@@ -1,0 +1,31 @@
+<mvc:View
+    controllerName="eventui.controller.Feedback"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    displayBlock="true">
+
+    <Page title="Session Feedback" showNavButton="true" navButtonPress="onBack">
+        <content>
+            <VBox class="sapUiMediumMargin">
+
+                <Title id="title" text="{eventService>title}" level="H2"/>
+
+                <Label text="How would you rate this session?" class="sapUiSmallMarginTop"/>
+                <RatingIndicator id="rating" maxValue="5" value="0"/>
+
+                <Label text="Detailed Comments" class="sapUiSmallMarginTop"/>
+                <TextArea
+                    id="comment"
+                    rows="5"
+                    width="100%"
+                    placeholder="Share your thoughts about the content, delivery, and what you found most valuable..."/>
+
+                <HBox class="sapUiMediumMarginTop" justifyContent="End">
+                    <Button text="Cancel" press="onBack" class="sapUiSmallMarginEnd"/>
+                    <Button text="Submit Feedback" type="Emphasized" press="onSubmit"/>
+                </HBox>
+
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

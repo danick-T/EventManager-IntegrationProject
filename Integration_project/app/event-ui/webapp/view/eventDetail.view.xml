@@ -99,6 +99,34 @@
                     </Table>
                 </Panel>
 
+                <Panel headerText="Session Feedback" class="sapUiSmallMarginBottom">
+                    <Table
+                        id="feedbackTable"
+                        items="{feedbackList>/items}"
+                        noDataText="No feedback submitted yet.">
+                        <columns>
+                            <Column width="20%"><Text text="Session"/></Column>
+                            <Column width="15%"><Text text="Reviewer"/></Column>
+                            <Column width="15%"><Text text="Rating"/></Column>
+                            <Column><Text text="Comment"/></Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Text text="{feedbackList>sessionTitle}"/>
+                                    <Text text="{feedbackList>userName}"/>
+                                    <RatingIndicator
+                                        value="{feedbackList>rating}"
+                                        maxValue="5"
+                                        editable="false"
+                                        class="sapUiTinyMarginTop"/>
+                                    <Text text="{feedbackList>comment}" wrapping="true"/>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </Panel>
+
             </VBox>
         </content>
     </Page>
