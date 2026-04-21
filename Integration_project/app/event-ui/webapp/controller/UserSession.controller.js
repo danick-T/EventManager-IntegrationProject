@@ -38,8 +38,8 @@ sap.ui.define([
 
         handleViewDetails: function (oEvent) {
             var oContext = oEvent.getSource().getBindingContext();
-            var oSession = oContext.getObject();
-            console.log("Details voor sessie:", oSession.ID, oSession.title);
+            var sId = oContext.getObject().ID;
+            this.getRouter().navTo("feedback", { sessionId: encodeURIComponent(sId) });
         }
 
     });

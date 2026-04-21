@@ -118,6 +118,11 @@
           "pattern": "my-sessions",
           "name": "userSessions",
           "target": "UserSessions"
+        },
+        {
+          "pattern": "feedback/{sessionId}",
+          "name": "feedback",
+          "target": "Feedback"
         }
 
       ],
@@ -146,6 +151,11 @@
           "id": "userSessions",
           "viewType": "XML",
           "viewName": "eventui.view.UserSession"
+        },
+        "Feedback": {
+          "id": "feedback",
+          "viewType": "XML",
+          "viewName": "eventui.view.Feedback"
         }
       }
     },

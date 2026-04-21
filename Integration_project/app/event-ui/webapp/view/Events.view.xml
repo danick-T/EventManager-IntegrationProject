@@ -5,6 +5,7 @@
     displayBlock="true">
 
     <Page id="eventsPage" enableScrolling="true">
+
         <content>
             <VBox class="sapUiMediumMargin">
 
@@ -111,7 +112,7 @@
                                     type="Transparent"
                                     icon="sap-icon://slim-arrow-right"
                                     iconFirst="false"
-                                    press=".onOpenSessionRegistration"/>
+                                    press=".onViewDetails"/>
 
                             </cells>
                         </ColumnListItem>

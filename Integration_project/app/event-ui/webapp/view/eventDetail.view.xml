@@ -1,6 +1,133 @@
-<mvc:View controllerName="eventui.controller.CreateEvent"
+<mvc:View controllerName="eventui.controller.EventDetail"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
-    <Page id="event_details" title="{i18n>title}">
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+    <Page id="eventDetailPage" showNavButton="true" navButtonPress=".onNavBack" title="{name}">
+        <content>
+            <VBox class="sapUiMediumMargin">
+                <Panel headerText="Event Information" class="sapUiSmallMarginBottom">
+                    <f:SimpleForm id="eventFrom" editable="false" layout="ResponsiveGridLayout"
+                        columnsL="2" columnsM="1">
+                        <Label text="Event Name" />
+                        <Text text="{name}" />
+
+                        <Label text="Description" />
+                        <Text text="{description}" />
+
+                        <Label text="Location" />
+                        <Text text="{location}" />
+
+                        <Label text="Start Date"/>
+                        <Text
+                            text="{
+                            path: 'startDate',
+                            formatter: '.formatDate'
+                        }"/>
+
+                        <Label text="End Date"/>
+                        <Text
+                            text="{
+                            path: 'endDate',
+                            formatter: '.formatDate'
+                        }"/>
+
+                        <Label text="Status" />
+                        <ObjectStatus
+                            text="{= ${active} ? 'Active' : 'Inactive'}"
+                            state="{= ${active} ? 'Success' : 'Error'}" />
+                    </f:SimpleForm>
+                </Panel>
+                <Panel headerText="Sessions" class="sapUiSmallMarginBottom">
+                    <Table id="eventDetailSessionsTable" items="{sessions}" growing="true"
+                        growingThreshold="10" noDataText="No sessions available for this event.">
+                        <columns>
+                            <Column>
+                                <Text text="Title" />
+                            </Column>
+                            <Column>
+                                <Text text="Description" />
+                            </Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true">
+                                <Text text="Start Time" />
+                            </Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true">
+                                <Text text="End Time" />
+                            </Column>
+                            <Column>
+                                <Text text="Speaker" />
+                            </Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true">
+                                <Text text="Room" />
+                            </Column>
+                            <Column>
+                                <Text text="Spots"/>
+                            </Column>
+                            <Column hAlign="End">
+                                <Text text="Actions"/>
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Text text="{title}" />
+                                    <Text text="{description}" />
+                                    <Text
+                                        text="{
+                                        path: 'startTime',
+                                        formatter: '.formatDateTime'
+                                    }" />
+                                    <Text
+                                        text="{
+                                        path: 'endTime',
+                                        formatter: '.formatDateTime'
+                                    }" />
+                                    <Text text="{speaker}" />
+                                    <Text text="{room}" />
+                                    <Text
+                                        text="{= ${availableSpots} + ' / ' + ${capacity}}" />
+                                    <Button 
+                                        text="Register"
+                                        type="Emphasized"
+                                        icon="sap-icon://add-activity"
+                                        press=".onRegisterForSession"
+                                        enabled="{= ${availableSpots} > 0}"
+                                    />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </Panel>
+
+                <Panel headerText="Session Feedback" class="sapUiSmallMarginBottom">
+                    <Table
+                        id="feedbackTable"
+                        items="{feedbackList>/items}"
+                        noDataText="No feedback submitted yet.">
+                        <columns>
+                            <Column width="20%"><Text text="Session"/></Column>
+                            <Column width="15%"><Text text="Reviewer"/></Column>
+                            <Column width="15%"><Text text="Rating"/></Column>
+                            <Column><Text text="Comment"/></Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Text text="{feedbackList>sessionTitle}"/>
+                                    <Text text="{feedbackList>userName}"/>
+                                    <RatingIndicator
+                                        value="{feedbackList>rating}"
+                                        maxValue="5"
+                                        editable="false"
+                                        class="sapUiTinyMarginTop"/>
+                                    <Text text="{feedbackList>comment}" wrapping="true"/>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </Panel>
+
+            </VBox>
+        </content>
     </Page>
 </mvc:View>
