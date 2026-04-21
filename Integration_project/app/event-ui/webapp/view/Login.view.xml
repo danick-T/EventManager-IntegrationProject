@@ -1,0 +1,45 @@
+<mvc:View
+    controllerName="eventui.controller.Login"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+
+    <Page showHeader="false">
+
+        <VBox height="100%" alignItems="Center" justifyContent="Center">
+
+            <VBox width="350px" class="sapUiSmallMargin" alignItems="Center">
+
+                <!-- EventSphere -->
+                <Title
+                    text="EventSphere"
+                    level="H1"
+                    class="eventTitle sapUiSmallMarginBottom"/>
+
+                <!-- Sign In -->
+                <Text
+                    text="Sign In"
+                    class="signInText sapUiSmallMarginBottom"/>
+
+                <!-- Form -->
+                <VBox width="100%">
+
+                    <Label text="Email Address"/>
+                    <Input id="email" type="Text" placeholder="example@email.com"/>
+
+                    <Label text="Password"/>
+                    <Input id="password" type="Password"/>
+
+                    <Button
+                        text="Login"
+                        press="onLogin"
+                        type="Emphasized"
+                        width="100%"
+                        class="sapUiSmallMarginTop"/>
+
+                </VBox>
+            </VBox>
+
+        </VBox>
+    </Page>
+
+</mvc:View>

@@ -41,5 +41,6 @@ sap.ui.define([
             var oSession = oContext.getObject();
             console.log("Details voor sessie:", oSession.ID, oSession.title);
         }
+
     });
 });

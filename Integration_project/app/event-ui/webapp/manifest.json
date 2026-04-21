@@ -96,9 +96,14 @@
       "routes": [
         {
           "pattern": "",
+          "name": "login",
+          "target": "Login"
+      },
+        {
+          "pattern": "events",
           "name": "events",
           "target": "Events"
-        },
+          },
         {
           "pattern": "event/{eventId}",
           "name": "eventDetail",
@@ -114,8 +119,14 @@
           "name": "userSessions",
           "target": "UserSessions"
         }
+
       ],
       "targets": {
+      "Login": {
+        "id": "login",
+        "viewType": "XML",
+        "viewName": "eventui.view.Login"
+      },
         "Events": {
           "id": "events",
           "viewType": "XML",

@@ -1,4 +1,4 @@
-<mvc:View controllerName="eventui.controller.Event"
+<mvc:View controllerName="eventui.controller.Events"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:core="sap.ui.core"
