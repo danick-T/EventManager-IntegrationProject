@@ -10,3 +10,8 @@ docs/
 npm-debug.log*
 .cds-dxfn-*
 authloginplan.md
+.db
+*.sqlite
+mta_archives/
+# added by cds
+.cdsrc-private.json
