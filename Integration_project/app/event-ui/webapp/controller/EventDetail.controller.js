@@ -28,7 +28,7 @@ sap.ui.define([
             oView.bindElement({
                 path: "/Events(" + sEventId + ")",
                 parameters: {
-                    $expand: "sessions($expand=feedback)"
+                    $expand: "sessions($expand=registrations($expand=feedback))"
                 },
                 events: {
                     dataReceived: this._onDataReceived.bind(this)
@@ -44,13 +44,15 @@ sap.ui.define([
             var aFeedback = [];
 
             (oData.sessions || []).forEach(function (oSession) {
-                (oSession.feedback || []).forEach(function (oFb) {
-                    aFeedback.push({
-                        sessionTitle: oSession.title,
-                        userName:     oFb.userName  || "Anonymous",
-                        rating:       oFb.rating    || 0,
-                        comment:      oFb.comment   || "",
-                        createdAt:    oFb.createdAt || ""
+                (oSession.registrations || []).forEach(function (oReg) {
+                    (oReg.feedback || []).forEach(function (oFb) {
+                        aFeedback.push({
+                            sessionTitle: oSession.title,
+                            userName:     oFb.email       || "Anonymous",
+                            rating:       oFb.score       || 0,
+                            comment:      oFb.comment     || "",
+                            createdAt:    oFb.submittedAt || ""
+                        });
                     });
                 });
             });

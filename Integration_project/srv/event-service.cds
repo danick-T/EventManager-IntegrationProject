@@ -2,6 +2,7 @@ using { eventmanager as db } from '../db/schema';
 
 service EventService {
 
+  entity Users as projection on db.Users;
   entity Events as projection on db.Events;
   entity Sessions as projection on db.Sessions {
     *,
