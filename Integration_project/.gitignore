@@ -9,3 +9,4 @@ docs/
 *.log
 npm-debug.log*
 .cds-dxfn-*
+authloginplan.md
