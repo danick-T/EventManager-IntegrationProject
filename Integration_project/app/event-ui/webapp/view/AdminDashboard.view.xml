@@ -1,0 +1,233 @@
+<mvc:View
+    controllerName="eventui.controller.AdminDashboard"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    displayBlock="true">
+
+    <Page id="adminDashboardPage" enableScrolling="false" class="adminDashboardPage">
+        <customHeader>
+            <Bar class="adminTopBar">
+                <contentLeft>
+                    <HBox alignItems="Center" class="adminBrand">
+                        <core:Icon src="sap-icon://dimension" size="1.5rem" class="adminBrandIcon"/>
+                        <Title text="EventSphere" level="H4" class="adminBrandTitle"/>
+                    </HBox>
+                </contentLeft>
+                <contentMiddle>
+                    <IconTabBar
+                        id="mainNavBar"
+                        selectedKey="dashboard"
+                        expanded="true"
+                        backgroundDesign="Transparent"
+                        select=".onNavSelect"
+                        class="adminHeaderTabs">
+                        <items>
+                            <IconTabFilter text="Events" key="events" icon="sap-icon://calendar"/>
+                            <IconTabFilter text="My Sessions" key="sessions" icon="sap-icon://group"/>
+                            <IconTabFilter text="Dashboard" key="dashboard" icon="sap-icon://grid"/>
+                        </items>
+                    </IconTabBar>
+                </contentMiddle>
+                <contentRight>
+                    <Button icon="sap-icon://search" type="Transparent" class="adminIconButton"/>
+                    <Button icon="sap-icon://bell" type="Transparent" class="adminIconButton"/>
+                    <Button icon="sap-icon://action-settings" type="Transparent" class="adminIconButton"/>
+                    <VBox alignItems="End" class="adminProfileText">
+                        <Text text="Alex Rivera" class="adminUserName"/>
+                        <Text text="Admin" class="adminUserRole"/>
+                    </VBox>
+                    <Avatar initials="AR" displaySize="XS" class="adminAvatar"/>
+                    <Button icon="sap-icon://slim-arrow-down" type="Transparent" class="adminIconButton"/>
+                </contentRight>
+            </Bar>
+        </customHeader>
+
+        <content>
+            <HBox fitContainer="true" class="adminShell">
+                <VBox class="adminSideNav" justifyContent="SpaceBetween">
+                    <VBox class="adminSideNavItems">
+                        <Button
+                            icon="sap-icon://grid"
+                            text="Overview"
+                            type="Transparent"
+                            width="100%"
+                            class="adminSideNavButton adminSideNavButtonActive"/>
+                        <Button
+                            icon="sap-icon://employee"
+                            text="Registrations"
+                            type="Transparent"
+                            width="100%"
+                            class="adminSideNavButton"/>
+                        <Button
+                            icon="sap-icon://settings"
+                            text="System Logs"
+                            type="Transparent"
+                            width="100%"
+                            class="adminSideNavButton"/>
+                    </VBox>
+
+                    <VBox class="adminStorageCard">
+                        <Text text="STORAGE USAGE" class="adminStorageLabel"/>
+                        <ProgressIndicator percentValue="65" displayValue="" width="100%" state="Information" class="adminStorageBar"/>
+                        <Text text="6.5 GB of 10 GB used" class="adminStorageValue"/>
+                    </VBox>
+                </VBox>
+
+                <ScrollContainer vertical="true" horizontal="false" height="100%" class="adminMainScroll">
+                    <VBox class="adminMain">
+                        <HBox justifyContent="SpaceBetween" alignItems="Start" wrap="Wrap" class="adminHeroRow">
+                            <VBox>
+                                <Title text="Admin Dashboard" level="H1" class="adminPageTitle"/>
+                                <Text text="Overview of corporate events and participant engagement" class="adminPageSubtitle"/>
+                            </VBox>
+                            <HBox alignItems="Center" wrap="Wrap" class="adminHeroActions">
+                                <Button icon="sap-icon://business-objects-experience" text="View Analytics" type="Default" class="adminSecondaryButton"/>
+                                <Button icon="sap-icon://add" text="Create Event" type="Emphasized" press=".onCreateEvent" class="adminPrimaryButton"/>
+                            </HBox>
+                        </HBox>
+
+                        <HBox wrap="Wrap" class="adminKpiGrid">
+                            <VBox class="adminKpiCard">
+                                <Text text="Total Events" class="adminKpiLabel"/>
+                                <HBox alignItems="Baseline">
+                                    <ObjectNumber number="24" class="adminKpiNumber"/>
+                                    <ObjectStatus text="12%" state="Success" icon="sap-icon://trend-up" class="adminKpiDelta"/>
+                                </HBox>
+                            </VBox>
+                            <VBox class="adminKpiCard">
+                                <Text text="Total Sessions" class="adminKpiLabel"/>
+                                <HBox alignItems="Baseline">
+                                    <ObjectNumber number="142" class="adminKpiNumber"/>
+                                    <ObjectStatus text="5%" state="Success" icon="sap-icon://trend-up" class="adminKpiDelta"/>
+                                </HBox>
+                            </VBox>
+                            <VBox class="adminKpiCard">
+                                <Text text="Total Registrations" class="adminKpiLabel"/>
+                                <HBox alignItems="Baseline">
+                                    <ObjectNumber number="3,842" class="adminKpiNumber"/>
+                                    <ObjectStatus text="18%" state="Success" icon="sap-icon://trend-up" class="adminKpiDelta"/>
+                                </HBox>
+                            </VBox>
+                            <VBox class="adminKpiCard">
+                                <Text text="Average Rating" class="adminKpiLabel"/>
+                                <HBox alignItems="Baseline">
+                                    <ObjectNumber number="4.8" class="adminKpiNumber"/>
+                                    <ObjectStatus text="0.2" state="Success" icon="sap-icon://trend-up" class="adminKpiDelta"/>
+                                </HBox>
+                            </VBox>
+                        </HBox>
+
+                        <VBox class="adminTableSection">
+                            <HBox justifyContent="SpaceBetween" alignItems="Center" class="adminTableHeader">
+                                <Title text="Events Management" level="H3" class="adminSectionTitle"/>
+                                <HBox alignItems="Center">
+                                    <Button icon="sap-icon://filter" text="Filter" type="Transparent" class="adminTableTool"/>
+                                    <Button icon="sap-icon://sort" text="Sort" type="Transparent" class="adminTableTool"/>
+                                </HBox>
+                            </HBox>
+
+                            <Table id="adminEventsTable" class="adminEventsTable">
+                                <columns>
+                                    <Column width="28%"><Text text="Event Name" class="adminColumnLabel"/></Column>
+                                    <Column width="17%"><Text text="Sessions" class="adminColumnLabel"/></Column>
+                                    <Column width="17%" hAlign="End"><Text text="Registrations" class="adminColumnLabel"/></Column>
+                                    <Column width="15%"><Text text="Status" class="adminColumnLabel"/></Column>
+                                    <Column width="17%"><Text text="Last Modified" class="adminColumnLabel"/></Column>
+                                    <Column width="6%" hAlign="End"><Text text="Actions" class="adminColumnLabel"/></Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem class="adminTableRow">
+                                        <cells>
+                                            <Text text="Global Sales Kickoff 2024" class="adminEventName"/>
+                                            <Text text="12 sessions" class="adminMutedText"/>
+                                            <Text text="450"/>
+                                            <ObjectStatus text="Active" state="Success" class="adminStatusActive"/>
+                                            <Text text="2023-11-20" class="adminMutedText"/>
+                                            <Button icon="sap-icon://overflow" type="Transparent" class="adminOverflowButton"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                    <ColumnListItem class="adminTableRow">
+                                        <cells>
+                                            <Text text="Product Engineering Offsite" class="adminEventName"/>
+                                            <Text text="8 sessions" class="adminMutedText"/>
+                                            <Text text="120"/>
+                                            <ObjectStatus text="Upcoming" state="Information" class="adminStatusUpcoming"/>
+                                            <Text text="2023-11-22" class="adminMutedText"/>
+                                            <Button icon="sap-icon://overflow" type="Transparent" class="adminOverflowButton"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                    <ColumnListItem class="adminTableRow adminHighlightedRow">
+                                        <cells>
+                                            <Text text="Annual Leadership Summit" class="adminEventName"/>
+                                            <Text text="15 sessions" class="adminMutedText"/>
+                                            <Text text="300"/>
+                                            <ObjectStatus text="Active" state="Success" class="adminStatusActive"/>
+                                            <Text text="2023-11-18" class="adminMutedText"/>
+                                            <Button icon="sap-icon://overflow" type="Transparent" class="adminOverflowButton"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                    <ColumnListItem class="adminTableRow">
+                                        <cells>
+                                            <Text text="Quarterly Town Hall - Q4" class="adminEventName"/>
+                                            <Text text="3 sessions" class="adminMutedText"/>
+                                            <Text text="850"/>
+                                            <ObjectStatus text="Closed" state="None" class="adminStatusClosed"/>
+                                            <Text text="2023-10-30" class="adminMutedText"/>
+                                            <Button icon="sap-icon://overflow" type="Transparent" class="adminOverflowButton"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                    <ColumnListItem class="adminTableRow">
+                                        <cells>
+                                            <Text text="AI &amp; Innovation Workshop" class="adminEventName"/>
+                                            <Text text="6 sessions" class="adminMutedText"/>
+                                            <Text text="85"/>
+                                            <ObjectStatus text="Upcoming" state="Information" class="adminStatusUpcoming"/>
+                                            <Text text="2023-11-25" class="adminMutedText"/>
+                                            <Button icon="sap-icon://overflow" type="Transparent" class="adminOverflowButton"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                    <ColumnListItem class="adminTableRow">
+                                        <cells>
+                                            <Text text="Customer Experience Expo" class="adminEventName"/>
+                                            <Text text="22 sessions" class="adminMutedText"/>
+                                            <Text text="1,200"/>
+                                            <ObjectStatus text="Active" state="Success" class="adminStatusActive"/>
+                                            <Text text="2023-11-15" class="adminMutedText"/>
+                                            <Button icon="sap-icon://overflow" type="Transparent" class="adminOverflowButton"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+
+                            <HBox justifyContent="SpaceBetween" alignItems="Center" class="adminPaginationRow">
+                                <Text text="Showing 6 of 24 events" class="adminPaginationText"/>
+                                <HBox alignItems="Center">
+                                    <Button text="Previous" type="Transparent" enabled="false" class="adminPagerButton"/>
+                                    <Button text="1" type="Emphasized" class="adminPagerButton adminPagerButtonActive"/>
+                                    <Button text="2" type="Transparent" class="adminPagerButton"/>
+                                    <Button text="3" type="Transparent" class="adminPagerButton"/>
+                                    <Button text="Next" type="Transparent" class="adminPagerButton"/>
+                                </HBox>
+                            </HBox>
+                        </VBox>
+                    </VBox>
+                </ScrollContainer>
+            </HBox>
+        </content>
+
+        <footer>
+            <Bar class="adminFooter">
+                <contentLeft>
+                    <Text text="© 2026 EventSphere Enterprise" class="adminFooterText"/>
+                    <Link text="Privacy Policy" class="adminFooterLink"/>
+                    <Link text="Terms of Service" class="adminFooterLink"/>
+                </contentLeft>
+                <contentRight>
+                    <core:Icon src="sap-icon://status-positive" color="#22c55e"/>
+                    <Text text="System Status: Operational" class="adminFooterText"/>
+                </contentRight>
+            </Bar>
+        </footer>
+    </Page>
+</mvc:View>
