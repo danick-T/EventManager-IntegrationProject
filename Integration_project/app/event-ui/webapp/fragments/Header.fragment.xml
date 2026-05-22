@@ -15,8 +15,9 @@
                 backgroundDesign="Transparent"
                 select=".onNavSelect">
                 <items>
-                    <IconTabFilter text="{i18n>navEvents}"   key="events"/>
-                    <IconTabFilter text="{i18n>navSessions}" key="sessions"/>
+                    <IconTabFilter text="{i18n>navEvents}" key="events" icon="sap-icon://calendar"/>
+                    <IconTabFilter text="{i18n>navSessions}" key="sessions" icon="sap-icon://group"/>
+                    <IconTabFilter text="{i18n>navDashboard}" key="dashboard" icon="sap-icon://grid"/>
                 </items>
             </IconTabBar>
         </contentMiddle>
