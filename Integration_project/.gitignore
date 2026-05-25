@@ -10,3 +10,5 @@ docs/
 npm-debug.log*
 .cds-dxfn-*
 authloginplan.md
+# added by cds
+.cdsrc-private.json
