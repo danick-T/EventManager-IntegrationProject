@@ -81,7 +81,7 @@ sap.ui.define([
             var oContext = oEvent.getSource().getBindingContext();
             var sId      = oContext.getObject().ID;
             this.getRouter().navTo("eventDetail", {
-                eventId: sId
+                eventId: encodeURIComponent(sId)
             });
         },
 
@@ -102,7 +102,6 @@ sap.ui.define([
                 this.getView().addDependent(this._oDialog);
             }
             this._oDialog.open();
-
         }
     });
 });
