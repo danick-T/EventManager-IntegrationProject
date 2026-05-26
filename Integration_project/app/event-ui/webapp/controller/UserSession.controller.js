@@ -15,7 +15,12 @@ sap.ui.define([
             this._loadHeader(oPage, "sessions");
             this._loadFooter(oPage);
             this._sCurrentFilter = "upcoming";
-            this._attachRouteMatched("userSessions", "sessions");
+            this.getRouter()
+                .getRoute("userSessions")
+                .attachPatternMatched(function() {
+                    this._setActiveNavKey("sessions"); 
+                    this._applyFilter();
+                },this);
         },
 
         handleSwitchPanel: function (oEvent) {

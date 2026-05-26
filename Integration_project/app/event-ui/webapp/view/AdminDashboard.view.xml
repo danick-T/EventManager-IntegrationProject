@@ -1,0 +1,138 @@
+<mvc:View
+    controllerName="eventui.controller.AdminDashboard"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    displayBlock="true">
+
+    <Page id="adminDashboardPage" title="Admin Dashboard" enableScrolling="true">
+        <content>
+            <VBox class="sapUiMediumMargin">
+
+                <Breadcrumbs>
+                    <Link text="Admin"/>
+                    <Link text="Dashboard"/>
+                </Breadcrumbs>
+
+                <HBox justifyContent="SpaceBetween" alignItems="Center" wrap="Wrap"
+                    class="sapUiSmallMarginTop sapUiSmallMarginBottom">
+                    <VBox>
+                        <Title text="Admin Dashboard" level="H1"/>
+                        <Text text="Overview of corporate events and participant engagement"/>
+                    </VBox>
+                    <Button icon="sap-icon://add" text="Create Event" type="Emphasized"
+                        press=".onCreateEvent"/>
+                </HBox>
+
+                <HBox wrap="Wrap" class="sapUiSmallMarginBottom kpiRow">
+                    <Panel class="sapUiTinyMargin kpiCard">
+                        <VBox class="sapUiSmallMargin">
+                            <Text text="Total Events"/>
+                            <HBox alignItems="Baseline">
+                                <ObjectNumber number="{ path: 'kpi>/totalEvents', formatter: '.formatter.formatCount' }" class="sapUiTinyMarginEnd"/>
+                            </HBox>
+                        </VBox>
+                    </Panel>
+                    <Panel class="sapUiTinyMargin kpiCard">
+                        <VBox class="sapUiSmallMargin">
+                            <Text text="Total Sessions"/>
+                            <HBox alignItems="Baseline">
+                                <ObjectNumber number="{ path: 'kpi>/totalSessions', formatter: '.formatter.formatCount' }" class="sapUiTinyMarginEnd"/>
+                            </HBox>
+                        </VBox>
+                    </Panel>
+                    <Panel class="sapUiTinyMargin kpiCard">
+                        <VBox class="sapUiSmallMargin">
+                            <Text text="Total Registrations"/>
+                            <HBox alignItems="Baseline">
+                                <ObjectNumber number="{ path: 'kpi>/totalRegistrations', formatter: '.formatter.formatCount' }" class="sapUiTinyMarginEnd"/>
+                            </HBox>
+                        </VBox>
+                    </Panel>
+                    <Panel class="sapUiTinyMargin kpiCard">
+                        <VBox class="sapUiSmallMargin">
+                            <Text text="Average Rating"/>
+                            <HBox alignItems="Baseline">
+                                <ObjectNumber number="{ path: 'kpi>/avgRating', formatter: '.formatter.formatRating' }" class="sapUiTinyMarginEnd"/>
+                            </HBox>
+                        </VBox>
+                    </Panel>
+                </HBox>
+
+                <Panel headerText="Events Management" class="sapUiSmallMarginBottom">
+                    <Table
+                        id="adminEventsTable"
+                        items="{
+                            path: '/Events',
+                            parameters: {
+                                $count: true,
+                                $orderby: 'startDate asc'
+                            }
+                        }"
+                        growing="true"
+                        growingThreshold="6"
+                        sticky="ColumnHeaders"
+                        updateFinished=".onTableUpdateFinished">
+
+                        <columns>
+                            <Column width="32%"><Text text="Event Name"/></Column>
+                            <Column width="20%"><Text text="Sessions"/></Column>
+                            <Column width="24%"><Text text="Registrations"/></Column>
+                            <Column width="14%"><Text text="Status"/></Column>
+                            <Column width="10%" hAlign="End"><Text text="Actions"/></Column>
+                        </columns>
+
+                        <items>
+                            <ColumnListItem type="Navigation" press=".onEditEvent">
+                                <cells>
+
+                                    <VBox>
+                                        <Text text="{name}" />
+                                    </VBox>
+
+
+                                    <HBox alignItems="Center">
+                                        <core:Icon src="sap-icon://activity-items" class="sapUiTinyMarginEnd"/>
+                                        <Text text="{sessionCount}"/>
+                                    </HBox>
+
+                                    <HBox alignItems="Center">
+                                        <core:Icon src="sap-icon://company-view" class="sapUiTinyMarginEnd"/>
+                                        <Text text="{registrationCount}"/>
+                                    </HBox>
+
+                                    <ObjectStatus
+                                        text="{parts:  [{path: 'active'}, {path: 'startDate'}, {path: 'endDate'}],
+                                               formatter: '.formatter.formatStatusText'}"
+                                        state="{parts: [{path: 'active'}, {path: 'startDate'}, {path: 'endDate'}],
+                                                formatter: '.formatter.formatStatusState'}"/>
+
+                                    <Button
+                                        type="Transparent"
+                                        icon="sap-icon://overflow"
+                                        iconFirst="false"
+                                        press=".onEditEvent"/>
+
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+
+                        <noData>
+                            <IllustratedMessage
+                                illustrationType="sapIllus-NoData"
+                                title="No events found"
+                                description="There are no events to display yet."/>
+                        </noData>
+
+                    </Table>
+
+                    <HBox justifyContent="Start" alignItems="Center"
+                        class="sapUiSmallMarginTop">
+                        <Text id="adminTableCountText" text=""/>
+                    </HBox>
+                </Panel>
+
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

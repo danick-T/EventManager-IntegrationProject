@@ -22,3 +22,11 @@
     text-align: center;
     color: black;
 }
+
+/* Admin dashboard KPI blokken: gelijke breedte, netjes wrappen, ruimte ertussen */
+.kpiCard {
+    flex: 1 1 200px;
+    margin: 0.75rem;
+}
+
+

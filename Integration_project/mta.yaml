@@ -1,0 +1,28 @@
+_schema-version: "3.1"
+ID: Integration_project
+version: 1.0.0
+description: EventManager Integration Project
+
+modules:
+  - name: Integration_project-srv
+    type: nodejs
+    path: .
+    parameters:
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm
+    requires:
+      - name: eventsphere-hdi
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
+
+resources:
+  - name: eventsphere-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+    properties:
+      hdi-service-name: ${service-name}
