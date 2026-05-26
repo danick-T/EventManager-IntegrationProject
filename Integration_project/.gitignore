@@ -12,6 +12,8 @@ npm-debug.log*
 authloginplan.md
 .db
 *.sqlite
+*.sqlite-shm
+*.sqlite-wal
 mta_archives/
 # added by cds
 .cdsrc-private.json
