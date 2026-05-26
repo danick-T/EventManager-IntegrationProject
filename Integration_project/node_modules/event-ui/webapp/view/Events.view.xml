@@ -72,11 +72,11 @@
                     </columns>
 
                     <items>
-                        <ColumnListItem type="Navigation" press=".onViewDetails">
+                        <ColumnListItem >
                             <cells>
 
                                 <VBox>
-                                    <Link text="{name}" press=".onViewDetails"/>
+                                 
                                     <Text text="{parts: [{path: 'ID'}],
                                                   formatter: '.formatter.formatEventId'}"
                                           class="sapUiTinyMarginTop"/>
@@ -111,7 +111,7 @@
                                     type="Transparent"
                                     icon="sap-icon://slim-arrow-right"
                                     iconFirst="false"
-                                    press=".onOpenSessionRegistration"/>
+                                    press=".onViewDetails"/>
 
                             </cells>
                         </ColumnListItem>

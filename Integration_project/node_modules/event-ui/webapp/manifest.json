@@ -105,7 +105,7 @@
           "target": "Events"
           },
         {
-          "pattern": "event/{eventId}",
+          "pattern": "events/{eventId}",
           "name": "eventDetail",
           "target": "EventDetail"
         },
@@ -118,8 +118,12 @@
           "pattern": "my-sessions",
           "name": "userSessions",
           "target": "UserSessions"
-        }
-
+        },
+        {
+          "pattern": "feedback/{sessionId}",
+          "name": "feedback",
+          "target": "Feedback"
+       }
       ],
       "targets": {
       "Login": {
@@ -146,6 +150,11 @@
           "id": "userSessions",
           "viewType": "XML",
           "viewName": "eventui.view.UserSession"
+        },
+        "Feedback": {
+          "viewName": "eventui.view.Feedback",
+          "viewType": "XML",
+          "id": "feedback"
         }
       }
     },
