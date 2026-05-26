@@ -1,8 +1,10 @@
 sap.ui.define([
     "eventui/controller/BaseController",
     "sap/m/MessageToast",
-    "sap/m/MessageBox"
-], function (BaseController, MessageToast, MessageBox) {
+    "sap/m/MessageBox",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator"
+], function (BaseController, MessageToast, MessageBox, Filter, FilterOperator) {
     "use strict";
 
     return BaseController.extend("eventui.controller.Feedback", {
@@ -41,24 +43,37 @@ sap.ui.define([
             const sUserName  = oUserModel ? oUserModel.getProperty("/name")  : "";
             const sEmail     = oUserModel ? oUserModel.getProperty("/email") || "" : "";
 
-            const oModel       = oView.getModel("eventService");
-            const oListBinding = oModel.bindList("/Feedback");
+            const oModel  = oView.getModel("eventService");
+            const oFilter = new Filter("session_ID", FilterOperator.EQ, this._sSessionId);
+            const that    = this;
 
-            oListBinding.create({
-                rating:     iRating,
-                comment:    sComment,
-                userName:   sUserName,
-                email:      sEmail,
-                session_ID: this._sSessionId,
-                createdAt:  new Date().toISOString()
-            });
+            oModel.bindList("/Registrations", null, null, [oFilter])
+                .requestContexts()
+                .then(function (aContexts) {
+                    const sRegistrationId = aContexts.length ? aContexts[0].getObject().ID : null;
+                    if (!sRegistrationId) {
+                        MessageBox.error("No registration found for this session. Please register first.");
+                        return;
+                    }
 
-            oModel.submitBatch(oModel.getUpdateGroupId()).then(function () {
-                MessageToast.show("Feedback submitted. Thank you!");
-                this.getRouter().navTo("userSessions");
-            }.bind(this)).catch(function (oError) {
-                MessageBox.error("Failed to submit feedback: " + oError.message);
-            });
+                    oModel.bindList("/Feedback").create({
+                        score:           iRating,
+                        comment:         sComment,
+                        email:           sEmail,
+                        submittedAt:     new Date().toISOString(),
+                        registration_ID: sRegistrationId
+                    });
+
+                    oModel.submitBatch(oModel.getUpdateGroupId()).then(function () {
+                        MessageToast.show("Feedback submitted. Thank you!");
+                        that.getRouter().navTo("userSessions");
+                    }).catch(function (oError) {
+                        MessageBox.error("Failed to submit feedback: " + oError.message);
+                    });
+                })
+                .catch(function () {
+                    MessageBox.error("Could not look up your registration.");
+                });
         },
 
         onBack: function () {

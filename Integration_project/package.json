@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "dependencies": {
     "@sap/cds": "^9",
+    "@cap-js/hana": "^1",
     "generator-easy-ui5": "^3.9.1"
   },
   "devDependencies": {
@@ -20,6 +21,15 @@
   },
   "cds": {
     "requires": {
+      "db": {
+        "kind": "sqlite",
+        "[hybrid]": {
+          "kind": "hana"
+        },
+        "[production]": {
+          "kind": "hana"
+        }
+      },
       "auth": {
         "kind": "mocked",
         "restrict_all_services": true,

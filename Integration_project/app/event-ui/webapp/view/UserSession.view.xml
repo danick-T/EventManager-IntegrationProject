@@ -9,7 +9,7 @@
         <Text text="Keep track of your scheduled corporate events and provide valuable feedback for completed sessions." 
         class="sapUiSmallMarginBottom"/>
 
-        <IconTabBar id="sessionTabBar" select="onToggleTab">
+        <IconTabBar id="sessionTabBar" select="handleSwitchPanel">
             <items>
                 <IconTabFilter text="Upcoming Sessions" key="upcoming"/>
                 <IconTabFilter text="Past Sessions" key="past"/>

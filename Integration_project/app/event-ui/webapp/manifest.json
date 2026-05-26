@@ -100,10 +100,15 @@
           "target": "Login"
       },
         {
+          "pattern": "register",
+          "name": "register",
+          "target": "Register"
+        },
+        {
           "pattern": "events",
           "name": "events",
           "target": "Events"
-          },
+        },
         {
           "pattern": "event/{eventId}",
           "name": "eventDetail",
@@ -120,6 +125,11 @@
           "target": "UserSessions"
         },
         {
+          "pattern": "admin-dashboard",
+          "name": "adminDashboard",
+          "target": "AdminDashboard"
+        },
+        {
           "pattern": "feedback/{sessionId}",
           "name": "feedback",
           "target": "Feedback"
@@ -132,6 +142,11 @@
         "viewType": "XML",
         "viewName": "eventui.view.Login"
       },
+      "Register": {
+          "id": "register",
+          "viewType": "XML",
+          "viewName": "eventui.view.Register"
+        },
         "Events": {
           "id": "events",
           "viewType": "XML",
@@ -151,6 +166,11 @@
           "id": "userSessions",
           "viewType": "XML",
           "viewName": "eventui.view.UserSession"
+        },
+        "AdminDashboard": {
+          "id": "adminDashboard",
+          "viewType": "XML",
+          "viewName": "eventui.view.AdminDashboard"
         },
         "Feedback": {
           "id": "feedback",

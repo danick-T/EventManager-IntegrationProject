@@ -16,6 +16,8 @@ sap.ui.define([
                 this.getRouter().navTo("events");
             } else if (sKey === "sessions") {
                 this.getRouter().navTo("userSessions");
+            } else if (sKey === "dashboard") {
+                this.getRouter().navTo("adminDashboard");
             }
         },
 
