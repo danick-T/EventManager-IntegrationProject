@@ -133,6 +133,21 @@
           "pattern": "feedback/{sessionId}",
           "name": "feedback",
           "target": "Feedback"
+        },
+        {
+          "pattern": "admin/event/{eventId}",
+          "name": "adminEditEvent",
+          "target": "AdminEditEvent"
+        },
+        {
+          "pattern": "admin/session/{sessionId}",
+          "name": "adminEditSession",
+          "target": "AdminEditSession"
+        },
+        {
+          "pattern": "session-actions/{sessionId}",
+          "name": "sessionActions",
+          "target": "UserSessionActions"
         }
 
       ],
@@ -176,6 +191,21 @@
           "id": "feedback",
           "viewType": "XML",
           "viewName": "eventui.view.Feedback"
+        },
+        "AdminEditEvent": {
+          "id": "adminEditEvent",
+          "viewType": "XML",
+          "viewName": "eventui.view.AdminEditEvent"
+        },
+        "AdminEditSession": {
+          "id": "adminEditSession",
+          "viewType": "XML",
+          "viewName": "eventui.view.AdminEditSession"
+        },
+        "UserSessionActions": {
+          "id": "userSessionActions",
+          "viewType": "XML",
+          "viewName": "eventui.view.UserSessionsActions"
         }
       }
     },

@@ -34,17 +34,39 @@ sap.ui.define([
             if (!oBinding) return;
 
             var sNow    = new Date().toISOString();
-            var oFilter = this._sCurrentFilter === "upcoming"
+            var bUpcoming = this._sCurrentFilter === "upcoming";
+            var oTimeFilter = bUpcoming
                 ? new Filter("startTime", FilterOperator.GT, sNow)
                 : new Filter("startTime", FilterOperator.LE, sNow);
 
-            oBinding.filter([oFilter]);
+            var oUserModel = this.getOwnerComponent().getModel("user");
+            var sUserId = oUserModel && oUserModel.getProperty("/ID");
+
+            var aFilters = [oTimeFilter];
+            if (sUserId) {
+                aFilters.push(new Filter({
+                    path: "registrations",
+                    operator: FilterOperator.Any,
+                    variable: "r",
+                    condition: new Filter("r/user_ID", FilterOperator.EQ, sUserId)
+                }));
+            }
+
+            oBinding.filter(new Filter({ filters: aFilters, and: true }));
+
+            this.byId("feedbackColumn").setVisible(!bUpcoming);
         },
 
         handleViewDetails: function (oEvent) {
             var oContext = oEvent.getSource().getBindingContext();
             var sId = oContext.getObject().ID;
             this.getRouter().navTo("feedback", { sessionId: encodeURIComponent(sId) });
+        },
+
+        handleSessionActions: function (oEvent) {
+            var oContext = oEvent.getSource().getBindingContext();
+            var sId = oContext.getObject().ID;
+            this.getRouter().navTo("sessionActions", { sessionId: encodeURIComponent(sId) });
         }
 
     });

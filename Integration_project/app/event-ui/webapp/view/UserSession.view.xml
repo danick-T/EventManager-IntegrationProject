@@ -29,9 +29,9 @@
                         <Column width="15%"><Text text="Event Name"/></Column>
                         <Column width="20%"><Text text="Session Name"/></Column>
                         <Column width="15%"><Text text="Date &amp; Time"/></Column>
-                        <Column width="20%"><Text text="status"/></Column>
-                        <Column width="5%"> <Text text="Feedback"/></Column>
-                        <Column width="18%" hAlign="End"><Text text="Actions"/></Column>
+                        <Column width="12%"><Text text="Speaker"/></Column>
+                        <Column id="feedbackColumn" width="20%"> <Text text="Feedback"/></Column>
+                        <Column width="11%" hAlign="End"><Text text="Actions"/></Column>
                     </columns>
 
                     <items>
@@ -59,11 +59,16 @@
                                         }"/>
                                     </HBox>                         
                                 </VBox>
-                                <ObjectStatus text="Confirmed" state="Success"/>
-
-                                <Text text="–"/>
+                                <ObjectStatus text="{speaker}" />
 
                                 <Button text="Give Feedback" press="handleViewDetails"></Button>
+
+                                <Button
+                                    type="Transparent"
+                                    icon="sap-icon://overflow"
+                                    iconFirst="false"
+                                    press="handleSessionActions"/>
+
                             </cells>
                         </ColumnListItem>
                     </items>
