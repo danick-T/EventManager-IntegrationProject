@@ -142,7 +142,7 @@
         "viewType": "XML",
         "viewName": "eventui.view.Login"
       },
-      "Register": {
+        "Register": {
           "id": "register",
           "viewType": "XML",
           "viewName": "eventui.view.Register"

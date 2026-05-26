@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\Pc\\\\Desktop\\\\School\\\\TI3\\\\Intergation_Project\\\\EventManager-IntegrationProject\\\\Integration_project\" -Recurse -Filter \"package.json\" -ErrorAction SilentlyContinue)",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "Bash(grep -E \"\\\\.\\(js|cjs|mjs\\)$\")",
+      "Bash(npx cds *)",
+      "Bash(cf --version)",
+      "Bash(mbt --version)",
+      "Bash(cds bind *)",
+      "PowerShell(cf *)"
+    ]
+  }
+}
