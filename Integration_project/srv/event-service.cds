@@ -12,7 +12,7 @@ service EventService {
   entity Feedback as projection on db.Feedback;
 
 }
-
+ 
 /**
 
 service EventService {

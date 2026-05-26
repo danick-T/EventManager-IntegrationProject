@@ -8,3 +8,4 @@ gen/
 docs/
 *.log
 npm-debug.log*
+Integration_project/.claude/settings.local.json
