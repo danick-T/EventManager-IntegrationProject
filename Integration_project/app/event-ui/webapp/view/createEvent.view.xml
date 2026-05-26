@@ -1,6 +1,98 @@
 <mvc:View controllerName="eventui.controller.CreateEvent"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
-    <Page id="create_event" title="{i18n>title}">
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+
+    <Page id="createEventPage"
+        showNavButton="true"
+        navButtonPress=".onNavBack"
+        title="{i18n>createEventHeader}">
+
+        <content>
+            
+            <VBox class="sapUiMediumMargin">
+
+                <!-- Subtitel onder de paginatitel -->
+                <Text text="{i18n>createEventSubtitle}" class="sapUiSmallMarginBottom"/>
+
+                <!-- Sectie 1: Algemene informatie -->
+                <Panel headerText="{i18n>ceGeneralInfo}" class="sapUiSmallMarginBottom">
+                    <f:SimpleForm id="generalInfoForm"
+                        editable="true"
+                        layout="ResponsiveGridLayout"
+                        labelSpanL="3"
+                        labelSpanM="4"
+                        emptySpanL="1">
+                        <f:content>
+                            <Label text="{i18n>ceEventTitle}" required="true"/>
+                            <Input id="inputName"
+                                value="{newEvent>/name}"
+                                placeholder="{i18n>ceEventTitlePlaceholder}"/>
+
+                            <Label text="{i18n>ceDescription}"/>
+                            <TextArea id="inputDescription"
+                                value="{newEvent>/description}"
+                                placeholder="{i18n>ceDescriptionPlaceholder}"
+                                rows="4"
+                                width="100%"/>
+
+                            <Label text="{i18n>ceLocation}"/>
+                            <Input id="inputLocation"
+                                value="{newEvent>/location}"
+                                placeholder="{i18n>ceLocationPlaceholder}"/>
+                        </f:content>
+                    </f:SimpleForm>
+                </Panel>
+
+                <!-- Sectie 2: Planning & zichtbaarheid -->
+                <Panel headerText="{i18n>ceSchedule}" class="sapUiSmallMarginBottom">
+                    <f:SimpleForm id="scheduleForm"
+                        editable="true"
+                        layout="ResponsiveGridLayout"
+                        labelSpanL="3"
+                        labelSpanM="4"
+                        emptySpanL="1">
+                        <f:content>
+                            <Label text="{i18n>ceStartDate}"/>
+                            <DatePicker id="inputStartDate"
+                                value="{newEvent>/startDate}"
+                                valueFormat="yyyy-MM-dd"
+                                displayFormat="long"/>
+
+                            <Label text="{i18n>ceEndDate}"/>
+                            <DatePicker id="inputEndDate"
+                                value="{newEvent>/endDate}"
+                                valueFormat="yyyy-MM-dd"
+                                displayFormat="long"/>
+
+                            <Label text="{i18n>ceActiveStatus}"/>
+                            <HBox alignItems="Center">
+                                <Switch id="inputActive"
+                                    state="{newEvent>/active}"/>
+                                <Text text="{i18n>ceActiveStatusDesc}"
+                                    class="sapUiSmallMarginBegin"/>
+                            </HBox>
+                        </f:content>
+                    </f:SimpleForm>
+                </Panel>
+
+            </VBox>
+        </content>
+
+        <!-- Footerbalk met acties, rechts uitgelijnd zoals in de mockup -->
+        <footer>
+            <Toolbar>
+                <ToolbarSpacer/>
+                <Button id="cancelButton"
+                    text="{i18n>ceCancel}"
+                    press=".onCancel"/>
+                <Button id="saveButton"
+                    text="{i18n>ceSave}"
+                    type="Emphasized"
+                    press=".onSave"/>
+            </Toolbar>
+        </footer>
+
     </Page>
 </mvc:View>
