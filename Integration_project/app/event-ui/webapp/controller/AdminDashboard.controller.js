@@ -26,30 +26,31 @@ sap.ui.define([
         },
 
         _loadKpis: function () {
-            const oModel    = this.getOwnerComponent().getModel();
             const oKpiModel = this.getView().getModel("kpi");
+            const sBase     = "/odata/v4/admin";
 
             const aCounts = [
-                { path: "/Events",        prop: "/totalEvents" },
-                { path: "/Sessions",      prop: "/totalSessions" },
-                { path: "/Registrations", prop: "/totalRegistrations" }
+                { url: sBase + "/Events/$count",        prop: "/totalEvents" },
+                { url: sBase + "/Sessions/$count",      prop: "/totalSessions" },
+                { url: sBase + "/Registrations/$count", prop: "/totalRegistrations" }
             ];
 
             aCounts.forEach(function (oEntry) {
-                const oBinding = oModel.bindList(
-                    oEntry.path, undefined, undefined, undefined,
-                    { $count: true }
-                );
-                oBinding.getHeaderContext().requestProperty("$count")
-                    .then(function (iCount) {
-                        oKpiModel.setProperty(oEntry.prop, iCount != null ? iCount : 0);
+                fetch(oEntry.url, { headers: { Accept: "text/plain" }, credentials: "include" })
+                    .then(function (oResp) {
+                        if (!oResp.ok) { throw new Error("HTTP " + oResp.status); }
+                        return oResp.text();
+                    })
+                    .then(function (sText) {
+                        oKpiModel.setProperty(oEntry.prop, parseInt(sText, 10) || 0);
                     })
                     .catch(function (oErr) {
-                        console.error("KPI count failed for " + oEntry.path, oErr);
+                        console.error("KPI count failed for " + oEntry.url, oErr);
                         oKpiModel.setProperty(oEntry.prop, 0);
                     });
             });
 
+            const oModel = this.getOwnerComponent().getModel();
             const oFeedbackBinding = oModel.bindList(
                 "/Feedback", undefined, undefined, undefined,
                 { $apply: "aggregate(score with average as avgScore)" }
