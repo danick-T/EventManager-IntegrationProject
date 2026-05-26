@@ -46,6 +46,16 @@ sap.ui.define([], function () {
         formatEventId: function (sId) {
             if (!sId) { return ""; }
             return "#" + sId.substring(0, 8).toUpperCase();
+        },
+
+        formatCount: function (iValue) {
+            if (iValue === null || iValue === undefined) { return "–"; }
+            return Number(iValue).toLocaleString('nl-BE');
+        },
+
+        formatRating: function (fValue) {
+            if (fValue === null || fValue === undefined) { return "–"; }
+            return Number(fValue).toFixed(1);
         }
     };
 });
