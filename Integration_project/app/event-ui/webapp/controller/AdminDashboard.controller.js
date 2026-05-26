@@ -13,7 +13,6 @@ sap.ui.define([
             const oPage = this.byId("adminDashboardPage");
             this._loadHeader(oPage, "dashboard");
             this._loadFooter(oPage);
-            this._attachRouteMatched("adminDashboard", "dashboard");
 
             this.getView().setModel(new JSONModel({
                 totalEvents:        null,
@@ -22,7 +21,20 @@ sap.ui.define([
                 avgRating:          null
             }), "kpi");
 
+            this.getRouter()
+                .getRoute("adminDashboard")
+                .attachPatternMatched(this._onRouteMatched, this);
+        },
+
+        _onRouteMatched: function () {
+            this._setActiveNavKey("dashboard");
             this._loadKpis();
+
+            const oTable = this.byId("adminEventsTable");
+            const oBinding = oTable && oTable.getBinding("items");
+            if (oBinding) {
+                oBinding.refresh();
+            }
         },
 
         _loadKpis: function () {
@@ -63,6 +75,13 @@ sap.ui.define([
 
         onCreateEvent: function () {
             this.getRouter().navTo("createEvent");
+        },
+
+        onEditEvent: function (oEvent) {
+            var oCtx = oEvent.getSource().getBindingContext();
+            if (!oCtx) { return; }
+            var sId = oCtx.getObject().ID;
+            this.getRouter().navTo("adminEditEvent", { eventId: encodeURIComponent(sId) });
         },
 
         onViewDetails: function (oEvent) {

@@ -229,16 +229,21 @@ sap.ui.define([
             var oModel = this.getView().getModel();
             var that = this;
 
-            // Combine first and last name to match the userName field in schema.cds
-            var sFullName = sFirstName + " " + sLastName;
+            var oUserModel = this.getOwnerComponent().getModel("user");
+            var sUserId = oUserModel && oUserModel.getProperty("/ID");
+
+            if (!sUserId) {
+                MessageBox.error("You must be logged in to register.");
+                return;
+            }
 
             var oListBinding = oModel.bindList("/Registrations");
 
             oListBinding.create({
-                userName: sFullName,
-                email: sEmail,
-                registeredAt: new Date().toISOString(),
-                session_ID: this._sCurrentSessionId
+                registrationDate: new Date().toISOString(),
+                attendanceConfirmed: false,
+                session_ID: this._sCurrentSessionId,
+                user_ID: sUserId
             });
 
             oModel.submitBatch("$auto").then(function () {
