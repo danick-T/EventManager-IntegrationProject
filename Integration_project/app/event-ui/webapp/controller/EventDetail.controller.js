@@ -298,6 +298,14 @@ sap.ui.define([
             return !!(iAvailable && iAvailable > 0);
         },
 
+        onCreateSession: function () {
+            var oContext = this.getView().getBindingContext();
+            var sEventId = oContext.getProperty("ID");
+            this.getOwnerComponent().getRouter().navTo("createSession", {
+                eventId: encodeURIComponent(sEventId)
+            });
+        },
+
         onNavBack: function () {
             this.getOwnerComponent().getRouter().navTo("events", {}, { replace: true });
         }

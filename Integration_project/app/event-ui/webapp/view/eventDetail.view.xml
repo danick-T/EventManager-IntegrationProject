@@ -39,6 +39,17 @@
                     </f:SimpleForm>
                 </Panel>
                 <Panel headerText="Sessions" class="sapUiSmallMarginBottom">
+                    <headerToolbar>
+                        <Toolbar>
+                            <Title text="Sessions"/>
+                            <ToolbarSpacer/>
+                            <Button
+                                text="Create Session"
+                                type="Emphasized"
+                                icon="sap-icon://add"
+                                press=".onCreateSession"/>
+                        </Toolbar>
+                    </headerToolbar>
                     <Table class="eventDetailSessionsTable" items="{sessions}" growing="true"
                         growingThreshold="10" noDataText="No sessions available for this event.">
                         <columns>

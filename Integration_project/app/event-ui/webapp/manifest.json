@@ -148,6 +148,11 @@
           "pattern": "session-actions/{sessionId}",
           "name": "sessionActions",
           "target": "UserSessionActions"
+        },
+        {
+          "pattern": "event/{eventId}/create-session",
+          "name": "createSession",
+          "target": "CreateSession"
         }
 
       ],
@@ -206,6 +211,11 @@
           "id": "userSessionActions",
           "viewType": "XML",
           "viewName": "eventui.view.UserSessionsActions"
+        },
+        "CreateSession": {
+          "id": "createSession",
+          "viewType": "XML",
+          "viewName": "eventui.view.CreateSession"
         }
       }
     },

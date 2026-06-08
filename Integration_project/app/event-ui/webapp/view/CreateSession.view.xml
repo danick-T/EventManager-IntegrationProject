@@ -1,0 +1,88 @@
+<mvc:View controllerName="eventui.controller.CreateSession"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+
+    <Page id="createSessionPage" showNavButton="true" navButtonPress=".onNavBack" title="Create Session">
+        <content>
+            <VBox class="sapUiMediumMargin">
+
+                <!-- Header -->
+                <HBox justifyContent="SpaceBetween" alignItems="Center" class="sapUiSmallMarginBottom">
+                    <VBox>
+                        <Title text="Create New Session" level="H1"/>
+                        <Text text="{sessionModel>/eventName}" class="sapUiTinyMarginTop"/>
+                    </VBox>
+                    <ObjectStatus text="Draft Mode" state="Warning"/>
+                </HBox>
+
+                <!-- Session Details Panel -->
+                <Panel class="sapUiSmallMarginBottom">
+                    <headerToolbar>
+                        <Toolbar>
+                            <core:Icon src="sap-icon://information" class="sapUiTinyMarginEnd"/>
+                            <Title text="Session Details"/>
+                        </Toolbar>
+                    </headerToolbar>
+                    <VBox class="sapUiSmallMargin">
+                        <Text text="Enter the core information for this specific session." class="sapUiSmallMarginBottom"/>
+
+                        <!-- General Information -->
+                        <Title text="GENERAL INFORMATION" level="H5" class="sapUiSmallMarginBottom sapUiTinyMarginTop"/>
+
+                        <f:SimpleForm editable="true" layout="ResponsiveGridLayout" columnsL="1" columnsM="1">
+                            <Label text="Session Title" required="true"/>
+                            <Input id="sessionTitle" value="{sessionModel>/title}" placeholder="e.g., Keynote: The Future of AI in Enterprise"/>
+
+                            <Label text="Description"/>
+                            <TextArea value="{sessionModel>/description}" rows="4" placeholder="Provide a brief overview of what will be covered in this session..."/>
+                        </f:SimpleForm>
+
+                        <!-- Schedule & Timing -->
+                        <Title text="SCHEDULE &amp; TIMING" level="H5" class="sapUiMediumMarginTop sapUiSmallMarginBottom"/>
+
+                        <f:SimpleForm editable="true" layout="ResponsiveGridLayout" columnsL="2" columnsM="1">
+                            <Label text="Start Date" required="true"/>
+                            <DatePicker id="startDate" placeholder="DD/MM/YYYY" displayFormat="dd/MM/yyyy"/>
+
+                            <Label text="Start Time (HH:MM)" required="true"/>
+                            <Input id="startTime" placeholder="bijv. 09:30" maxLength="5" value="{sessionModel>/startTimeStr}"/>
+
+                            <Label text="End Date" required="true"/>
+                            <DatePicker id="endDate" placeholder="DD/MM/YYYY" displayFormat="dd/MM/yyyy"/>
+
+                            <Label text="End Time (HH:MM)" required="true"/>
+                            <Input id="endTime" placeholder="bijv. 17:00" maxLength="5" value="{sessionModel>/endTimeStr}"/>
+                        </f:SimpleForm>
+
+                        <!-- Participation & Speakers -->
+                        <Title text="PARTICIPATION &amp; SPEAKERS" level="H5" class="sapUiMediumMarginTop sapUiSmallMarginBottom"/>
+
+                        <f:SimpleForm editable="true" layout="ResponsiveGridLayout" columnsL="2" columnsM="1">
+                            <Label text="Maximum Participants"/>
+                            <VBox>
+                                <StepInput id="maxParticipants" value="{sessionModel>/capacity}" min="0" step="1"/>
+                                <Text text="Setting to '0' implies unlimited capacity." class="sapUiTinyMarginTop"/>
+                            </VBox>
+
+                            <Label text="Optional Speaker"/>
+                            <Input value="{sessionModel>/speaker}" placeholder="e.g., Dr. Sarah Jenkins"/>
+
+                            <Label text="Room"/>
+                            <Input value="{sessionModel>/room}" placeholder="e.g., Hall A"/>
+                        </f:SimpleForm>
+
+                    </VBox>
+                </Panel>
+
+                <!-- Action Buttons -->
+                <HBox justifyContent="End" class="sapUiSmallMarginTop">
+                    <Button text="Cancel" press=".onNavBack" class="sapUiTinyMarginEnd"/>
+                    <Button text="Save Session" type="Emphasized" press=".onSaveSession"/>
+                </HBox>
+
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>
