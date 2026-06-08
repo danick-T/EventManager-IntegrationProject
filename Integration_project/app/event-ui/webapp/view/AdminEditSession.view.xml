@@ -35,10 +35,12 @@
                         <Input value="{description}" />
 
                         <Label text="Start Time"/>
-                        <DateTimePicker value="{startTime}" displayFormat="long"/>
+                        <DateTimePicker id="idSessionStartTime" value="{startTime}" displayFormat="long"
+                            change=".onSessionTimeChange"/>
 
                         <Label text="End Time"/>
-                        <DateTimePicker value="{endTime}" displayFormat="long"/>
+                        <DateTimePicker id="idSessionEndTime" value="{endTime}" displayFormat="long"
+                            change=".onSessionTimeChange"/>
 
                         <Label text="Speaker" />
                         <Input value="{speaker}" />
@@ -50,27 +52,23 @@
 
                         <Label text="Room" />
                         <Input value="{room}" />
-
-                        <VBox>
-                            <HBox >
-                                <Button 
-                                    type="Emphasized"
-                                    icon="sap-icon://business-card"
-                                    press=".onSaveSession"
-                                    text="Save Changes"
-                                    />
-
-                                <Button 
-                                    type="Emphasized"
-                                    icon="sap-icon://business-card"
-                                    press=".onDeleteSession"
-                                    text="delete Session"
-                                />
-                            
-                            </HBox>
-                        </VBox>
-
                     </f:SimpleForm>
+
+                    <HBox class="sapUiSmallMarginTop">
+                        <Button 
+                            type="Emphasized"
+                            icon="sap-icon://business-card"
+                            press=".onSaveSession"
+                            text="Save Changes"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <Button 
+                            type="Emphasized"
+                            icon="sap-icon://business-card"
+                            press=".onDeleteSession"
+                            text="delete Session"
+                        /> 
+                    </HBox>
                 </Panel>
 
                 <!-- Additional sections for managing speakers and registrations can be added here -->

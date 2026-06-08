@@ -26,7 +26,7 @@
 
                 <!-- Event Edit Form -->
                 <Panel headerText="Event Details" class="sapUiSmallMarginBottom">
-                    <f:SimpleForm id="eventEditForm" editable="true" layout="ResponsiveGridLayout"
+                    <f:SimpleForm id="eventEditForm" editable="false" layout="ResponsiveGridLayout"
                         columnsL="2" columnsM="1">
                         <Label text="Event Name" />
                         <Input value="{name}" />
@@ -84,7 +84,7 @@
                                 <Text text="Spots"/>
                             </Column>
                             <Column hAlign="End">
-                                <Text text="Actions"/>
+                                <Text text="Edit Session"/>
                             </Column>
                         </columns>
                         <items>
@@ -108,7 +108,7 @@
                                         text="{= ${availableSpots} + ' / ' + ${capacity}}" />
                                     <Button 
                                         type="Emphasized"
-                                        icon="sap-icon://business-card"
+                                        icon="sap-icon://request"
                                         press=".onManageSession"
                                     />
                                 </cells>
