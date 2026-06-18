@@ -13,6 +13,7 @@
                 id="mainNavBar"
                 expanded="true"
                 backgroundDesign="Transparent"
+                headerDesign="Plain"
                 select=".onNavSelect">
                 <items>
                     <IconTabFilter text="{i18n>navEvents}" key="events" icon="sap-icon://calendar"/>
@@ -26,7 +27,6 @@
             <Button icon="sap-icon://bell"/>
             <Button icon="sap-icon://action-settings"/>
             <Avatar initials="{user>/initials}" displaySize="XS"/>
-            <Text text="{user>/name}" class="sapUiSmallMarginBegin"/>
         </contentRight>
     </Bar>
 </core:FragmentDefinition>

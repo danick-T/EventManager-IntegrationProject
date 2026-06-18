@@ -28,7 +28,7 @@ sap.ui.define([
             password:  "denzl123",
             ID:        "11111111-1111-1111-1111-111111111102",
             firstName: "Denzl",
-            lastName:  "",
+            lastName:  "DeM",
             role:      "user"
         }
     ];
@@ -55,16 +55,20 @@ sap.ui.define([
                 return;
             }
 
-            // Sla de ingelogde gebruiker op in een globaal model zodat andere pagina's het kunnen gebruiken
-            var oComponent = this.getOwnerComponent();
-            oComponent.setModel(new JSONModel({
+            // Sla de ingelogde gebruiker op in sessionStorage (blijft na refresh)
+            var oUserData = {
                 ID:        oUser.ID,
                 firstName: oUser.firstName,
                 lastName:  oUser.lastName,
                 email:     oUser.email,
                 role:      oUser.role,
                 fullName:  oUser.firstName + " " + oUser.lastName
-            }), "user");
+            };
+            sessionStorage.setItem("loggedInUser", JSON.stringify(oUserData));
+
+            // Sla ook op in het globale model
+            var oComponent = this.getOwnerComponent();
+            oComponent.setModel(new JSONModel(oUserData), "user");
 
             // Navigeer naar de events pagina
             oComponent.getRouter().navTo("events");

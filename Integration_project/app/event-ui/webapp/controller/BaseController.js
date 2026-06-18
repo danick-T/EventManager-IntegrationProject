@@ -55,7 +55,7 @@ sap.ui.define([
                 name: "eventui.fragments.Footer",
                 controller: this
             }).then(oBar => {
-                oPage.setFooter(oBar);
+                oPage.addContent(oBar);
             });
         },
     });

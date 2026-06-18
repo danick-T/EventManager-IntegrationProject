@@ -1,7 +1,8 @@
 sap.ui.define([
     "sap/ui/core/UIComponent",
+    "sap/ui/model/json/JSONModel",
     "eventui/model/models"
-], function (UIComponent, models) {
+], function (UIComponent, JSONModel, models) {
     "use strict";
 
     return UIComponent.extend("eventui.Component", {
@@ -13,11 +14,16 @@ sap.ui.define([
         },
 
         init: function () {
-            // DE FIX: In klassieke JS gebruik je de prototype-aanroep in plaats van 'super'
             UIComponent.prototype.init.apply(this, arguments);
 
             // set the device model
             this.setModel(models.createDeviceModel(), "device");
+
+            // Herstel de ingelogde gebruiker uit sessionStorage (na refresh)
+            var sUser = sessionStorage.getItem("loggedInUser");
+            if (sUser) {
+                this.setModel(new JSONModel(JSON.parse(sUser)), "user");
+            }
 
             // enable routing
             this.getRouter().initialize();

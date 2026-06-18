@@ -199,6 +199,12 @@ sap.ui.define([
                 return;
             }
 
+            var rEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!rEmail.test(sEmail.trim())) {
+                MessageBox.warning("Please enter a valid email address (e.g. name@example.com).");
+                return;
+            }
+
             // All good — create the registration
             this._createRegistration(sFirstName.trim(), sLastName.trim(), sEmail.trim());
         },
@@ -231,6 +237,14 @@ sap.ui.define([
 
             var oUserModel = this.getOwnerComponent().getModel("user");
             var sUserId = oUserModel && oUserModel.getProperty("/ID");
+
+            if (!sUserId) {
+                var sStored = sessionStorage.getItem("loggedInUser");
+                if (sStored) {
+                    var oStored = JSON.parse(sStored);
+                    sUserId = oStored.ID;
+                }
+            }
 
             if (!sUserId) {
                 MessageBox.error("You must be logged in to register.");

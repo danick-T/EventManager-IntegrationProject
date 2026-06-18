@@ -47,7 +47,8 @@
                                 text="Create Session"
                                 type="Emphasized"
                                 icon="sap-icon://add"
-                                press=".onCreateSession"/>
+                                press=".onCreateSession"
+                                visible="{= ${user>/role} === 'admin'}"/>
                         </Toolbar>
                     </headerToolbar>
                     <Table class="eventDetailSessionsTable" items="{sessions}" growing="true"
@@ -96,7 +97,7 @@
                                     <Text text="{speaker}" />
                                     <Text text="{room}" />
                                     <Text
-                                        text="{= ${availableSpots} + ' / ' + ${capacity}}" />
+                                        text="{= (${capacity} - ${availableSpots}) + ' / ' + ${capacity}}" />
                                     <Button 
                                         text="Register"
                                         type="Emphasized"
