@@ -27,6 +27,7 @@
             <Button icon="sap-icon://bell"/>
             <Button icon="sap-icon://action-settings"/>
             <Avatar initials="{user>/initials}" displaySize="XS"/>
+            <Button text="{i18n>logout}" press=".onLogout" class="sapUiTinyMarginBegin"/>
         </contentRight>
     </Bar>
 </core:FragmentDefinition>

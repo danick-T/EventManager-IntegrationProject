@@ -1,7 +1,7 @@
 using { eventmanager as db } from '../db/schema';
 
 service AdminService {
-  entity Users as projection on db.Users;
+  entity Users as projection on db.Users excluding { password };
   entity Events as projection on db.Events {
     *,
     virtual null as sessionCount      : Integer,

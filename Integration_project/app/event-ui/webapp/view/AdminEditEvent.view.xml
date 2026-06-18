@@ -117,6 +117,72 @@
                     </Table>
                 </Panel>
 
+                <Panel headerText="Scorebord per sessie" class="sapUiSmallMarginBottom">
+                    <Table items="{sessionStats>/items}" noDataText="Nog geen sessies.">
+                        <columns>
+                            <Column>
+                                <Text text="Sessie" />
+                            </Column>
+                            <Column>
+                                <Text text="Registraties" />
+                            </Column>
+                            <Column>
+                                <Text text="Gemiddelde score" />
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Text text="{sessionStats>title}" />
+                                    <Text text="{sessionStats>registrationCount}" />
+                                    <Text
+                                        text="{
+                                        path: 'sessionStats>avgScore',
+                                        formatter: '.formatAvgScore'
+                                    }" />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </Panel>
+
+                <Panel headerText="Registraties voor dit evenement" class="sapUiSmallMarginBottom">
+                    <Table items="{registrationList>/items}" noDataText="Nog geen registraties.">
+                        <columns>
+                            <Column>
+                                <Text text="Sessie" />
+                            </Column>
+                            <Column>
+                                <Text text="Voornaam" />
+                            </Column>
+                            <Column>
+                                <Text text="Achternaam" />
+                            </Column>
+                            <Column>
+                                <Text text="Email" />
+                            </Column>
+                            <Column>
+                                <Text text="Geregistreerd op" />
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Text text="{registrationList>sessionTitle}" />
+                                    <Text text="{registrationList>firstName}" />
+                                    <Text text="{registrationList>lastName}" />
+                                    <Text text="{registrationList>email}" />
+                                    <Text
+                                        text="{
+                                        path: 'registrationList>registrationDate',
+                                        formatter: '.formatDateTime'
+                                    }" />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </Panel>
+
             </VBox>
         </content>
 

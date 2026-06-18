@@ -2,7 +2,7 @@ using { eventmanager as db } from '../db/schema';
 
 service EventService {
 
-  entity Users as projection on db.Users;
+  entity Users as projection on db.Users excluding { password };
   entity Events as projection on db.Events;
   entity Sessions as projection on db.Sessions {
     *,
@@ -10,6 +10,8 @@ service EventService {
   };
   entity Registrations as projection on db.Registrations;
   entity Feedback as projection on db.Feedback;
+
+  action login(email: String, password: String) returns Users;
 
 }
  

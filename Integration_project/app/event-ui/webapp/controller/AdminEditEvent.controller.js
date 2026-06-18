@@ -1,9 +1,10 @@
 sap.ui.define([
     "eventui/controller/BaseController",
     "sap/ui/core/format/DateFormat",
+    "sap/ui/model/json/JSONModel",
     "sap/m/MessageBox",
     "sap/m/MessageToast"
-], function (BaseController, DateFormat, MessageBox, MessageToast) {
+], function (BaseController, DateFormat, JSONModel, MessageBox, MessageToast) {
     "use strict";
 
     return BaseController.extend("eventui.controller.AdminEditEvent", {
@@ -23,13 +24,65 @@ sap.ui.define([
         _onRouteMatched: function (oEvent) {
             var oArgs = oEvent.getParameter("arguments");
             var sId = decodeURIComponent(oArgs.eventId);
+            var oView = this.getView();
 
-            this.getView().bindElement({
+            oView.setModel(new JSONModel({ items: [] }), "sessionStats");
+            oView.setModel(new JSONModel({ items: [] }), "registrationList");
+
+            oView.bindElement({
                 path: "/Events(" + sId + ")",
                 parameters: {
-                    $expand: "sessions"
+                    $expand: "sessions($expand=registrations($expand=user,feedback))"
+                },
+                events: {
+                    dataReceived: this._onDataReceived.bind(this)
                 }
             });
+        },
+
+        _onDataReceived: function () {
+            var oContext = this.getView().getBindingContext();
+            if (!oContext) { return; }
+
+            var oData = oContext.getObject();
+            var aSessionStats = [];
+            var aRegistrationList = [];
+
+            (oData.sessions || []).forEach(function (oSession) {
+                var aRegistrations = oSession.registrations || [];
+                var aScores = [];
+
+                aRegistrations.forEach(function (oReg) {
+                    (oReg.feedback || []).forEach(function (oFb) {
+                        if (oFb.score !== null && oFb.score !== undefined) {
+                            aScores.push(oFb.score);
+                        }
+                    });
+
+                    var oUser = oReg.user || {};
+                    aRegistrationList.push({
+                        sessionTitle: oSession.title,
+                        firstName: oUser.firstName || "",
+                        lastName: oUser.lastName || "",
+                        email: oUser.email || "",
+                        registrationDate: oReg.registrationDate
+                    });
+                });
+
+                var iScoreSum = aScores.reduce(function (iSum, iScore) {
+                    return iSum + iScore;
+                }, 0);
+                var fAvgScore = aScores.length ? Number((iScoreSum / aScores.length).toFixed(1)) : null;
+
+                aSessionStats.push({
+                    title: oSession.title,
+                    registrationCount: aRegistrations.length,
+                    avgScore: fAvgScore
+                });
+            });
+
+            this.getView().getModel("sessionStats").setProperty("/items", aSessionStats);
+            this.getView().getModel("registrationList").setProperty("/items", aRegistrationList);
         },
 
         formatDateTime: function (sValue) {
@@ -41,6 +94,13 @@ sap.ui.define([
                 style: "medium"
             });
             return oFormat.format(oDate);
+        },
+
+        formatAvgScore: function (vValue) {
+            if (vValue === null || vValue === undefined) {
+                return "—";
+            }
+            return vValue.toFixed(1) + " / 5";
         },
 
         onManageSession: function (oEvent) {

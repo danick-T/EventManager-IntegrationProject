@@ -10,6 +10,7 @@ entity Users {
     firstName       : String(100);
     lastName        : String(100);
     email           : String(100);
+    password        : String(100);
     role            : UserRole default 'user';
     xsuaaId         : String(255);
 

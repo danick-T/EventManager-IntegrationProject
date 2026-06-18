@@ -1,7 +1,8 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/core/Fragment",
-], function (Controller, Fragment) {
+    "sap/ui/model/json/JSONModel"
+], function (Controller, Fragment, JSONModel) {
     "use strict";
 
     return Controller.extend("eventui.controller.BaseController", {
@@ -21,6 +22,12 @@ sap.ui.define([
             }
         },
 
+        onLogout() {
+            sessionStorage.removeItem("loggedInUser");
+            this.getOwnerComponent().setModel(null, "user");
+            this.getRouter().navTo("login", {}, { replace: true });
+        },
+
         _setActiveNavKey(sKey) {
             const oNavBar = this.byId("mainNavBar");
             if (oNavBar) {
@@ -37,6 +44,15 @@ sap.ui.define([
         },
 
         _loadHeader(oPage, sActiveKey) {
+            var oComponent = this.getOwnerComponent();
+            var oUserModel = oComponent.getModel("user");
+            if (!oUserModel || !oUserModel.getProperty("/initials")) {
+                var sStored = sessionStorage.getItem("loggedInUser");
+                if (sStored) {
+                    oComponent.setModel(new JSONModel(JSON.parse(sStored)), "user");
+                }
+            }
+
             this.onNavSelect = this.onNavSelect.bind(this);
 
             return Fragment.load({
