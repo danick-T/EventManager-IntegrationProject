@@ -1,0 +1,60 @@
+<mvc:View controllerName="eventui.controller.UserSessionActions"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    displayBlock="true">
+    <Page id="UserSessionActions" enableScrolling="true" >
+        <Breadcrumbs >
+            <Link text="Home" href="#/home"/>
+            <Link text="My Sessions" href="#/sessions"/>
+            <Link text="Session Actions"/>
+        </Breadcrumbs>
+        <Title text="Session actions" level="H1"
+            class="sapUiSmallMarginTop sapUiSmallMarginBottom"/>
+        <Text text="Here you can manage your session registrations, view details, and provide feedback for completed sessions."/>
+
+        <Panel headerText="Event Information" class="sapUiSmallMarginBottom">
+            <f:SimpleForm id="sessionform" editable="false" layout="ResponsiveGridLayout"
+                columnsL="2" columnsM="1">
+                <Label text="Event Name" />
+                <Text text="{name}" />
+
+                <Label text="Session Name" />
+                <Text text="{title}" />
+
+                <Label text="Description" />
+                <Text text="{description}" />
+
+                <Label text="Date"/>
+                <Text text="{
+                    path: 'startTime',
+                    targetType: 'any',
+                    formatter: '.formatter.formatDate'
+                }"/>
+                <Label text="Timing"/>
+                <Text text="{
+                    parts: [
+                        { path: 'startTime', targetType: 'any' },
+                        { path: 'endTime',   targetType: 'any' }
+                    ],
+                    formatter: '.formatter.formatTimeRange'
+                }"/>
+
+
+                <Label text="Speaker" />
+                <Text text="{speaker}" />
+
+                <Label text="Room" />
+                <Text text="{room}" />
+
+                <Label text="Capacity" />
+                <Text text="{capacity}" />
+            </f:SimpleForm>
+
+            <Button text="Delete Registration" type="Emphasized" class="sapUiSmallMarginTop"
+                press=".handleRegistration"/>
+
+        </Panel>
+    </Page>
+</mvc:View>

@@ -1,0 +1,81 @@
+<mvc:View
+    controllerName="eventui.controller.AdminEditSession"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    displayBlock="true">
+
+    <Page id="adminEditSessionPage" title="Admin Edit Session" enableScrolling="true">
+        <content>
+            <VBox class="sapUiMediumMargin">
+
+                <Breadcrumbs>
+                    <Link text="Admin" href="#/admin"/>
+                    <Link text="Dashboard" href="#/admin/dashboard"/>
+                    <Link text="Edit Session"/>
+                </Breadcrumbs>
+
+                <HBox justifyContent="SpaceBetween" alignItems="Center" wrap="Wrap"
+                    class="sapUiSmallMarginTop sapUiSmallMarginBottom">
+                    <VBox>
+                        <Title text="Edit Session" level="H1"/>
+                        <Text text="Modify session details, manage speakers, and oversee participant registrations"/>
+                    </VBox>
+                </HBox>
+
+                <!-- Session Edit Form -->
+                <Panel headerText="Session Details" class="sapUiSmallMarginBottom">
+                    <f:SimpleForm id="sessionEditForm" editable="true" layout="ResponsiveGridLayout"
+                        columnsL="2" columnsM="1">
+                        <Label text="Session Title" />
+                        <Input value="{title}" />
+
+                        <Label text="Description" />
+                        <Input value="{description}" />
+
+                        <Label text="Start Time"/>
+                        <DateTimePicker id="idSessionStartTime" value="{startTime}" displayFormat="long"
+                            change=".onSessionTimeChange"/>
+
+                        <Label text="End Time"/>
+                        <DateTimePicker id="idSessionEndTime" value="{endTime}" displayFormat="long"
+                            change=".onSessionTimeChange"/>
+
+                        <Label text="Speaker" />
+                        <Input value="{speaker}" />
+
+                        <Label text="Available Spots" />
+                        <Text
+                            text="{= ${availableSpots} + ' / ' + ${capacity}}" 
+                            />
+
+                        <Label text="Room" />
+                        <Input value="{room}" />
+                    </f:SimpleForm>
+
+                    <HBox class="sapUiSmallMarginTop">
+                        <Button 
+                            type="Emphasized"
+                            icon="sap-icon://business-card"
+                            press=".onSaveSession"
+                            text="Save Changes"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <Button 
+                            type="Emphasized"
+                            icon="sap-icon://business-card"
+                            press=".onDeleteSession"
+                            text="delete Session"
+                        /> 
+                    </HBox>
+                </Panel>
+
+                <!-- Additional sections for managing speakers and registrations can be added here -->
+                <!-- For example, a table to manage registered participants or assigned speakers -->
+
+            </VBox>
+        </content>
+
+    </Page>
+</mvc:View>

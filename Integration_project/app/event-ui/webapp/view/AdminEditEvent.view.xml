@@ -1,0 +1,124 @@
+<mvc:View
+    controllerName="eventui.controller.AdminEditEvent"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    displayBlock="true">
+
+    <Page id="adminEditEventPage" title="Admin Edit Event" enableScrolling="true">
+        <content>
+            <VBox class="sapUiMediumMargin">
+
+                <Breadcrumbs>
+                    <Link text="Admin" href="#/admin"/>
+                    <Link text="Dashboard" href="#/admin/dashboard"/>
+                    <Link text="Edit Event"/>
+                </Breadcrumbs>
+
+                <HBox justifyContent="SpaceBetween" alignItems="Center" wrap="Wrap"
+                    class="sapUiSmallMarginTop sapUiSmallMarginBottom">
+                    <VBox>
+                        <Title text="Edit Event" level="H1"/>
+                        <Text text="Modify event details, manage sessions, and oversee participant registrations"/>
+                    </VBox>
+                </HBox>
+
+                <!-- Event Edit Form -->
+                <Panel headerText="Event Details" class="sapUiSmallMarginBottom">
+                    <f:SimpleForm id="eventEditForm" editable="false" layout="ResponsiveGridLayout"
+                        columnsL="2" columnsM="1">
+                        <Label text="Event Name" />
+                        <Input value="{name}" />
+
+                        <Label text="Description" />
+                        <Input value="{description}" />
+
+                        <Label text="Start Date"/>
+                        <DatePicker value="{startDate}" displayFormat="long"/>
+
+                        <Label text="End Date"/>
+                        <DatePicker value="{endDate}" displayFormat="long"/>
+
+                    </f:SimpleForm>
+
+                    <HBox class="sapUiSmallMarginTop">
+                        <Button
+                            type="Emphasized"
+                            icon="sap-icon://save"
+                            text="Save Changes"
+                            press=".onSaveEvent"
+                            class="sapUiTinyMarginEnd"/>
+                        <Button
+                            type="Reject"
+                            icon="sap-icon://delete"
+                            text="Delete Event"
+                            press=".onDeleteEvent"/>
+                    </HBox>
+                </Panel>
+
+                <!-- Additional sections for managing sessions and registrations can be added here -->
+                <Panel headerText="Sessions" class="sapUiSmallMarginBottom">
+                    <Table class="eventDetailSessionsTable" items="{sessions}" growing="true"
+                        growingThreshold="10" noDataText="No sessions available for this event.">
+                        <columns>
+                            <Column>
+                                <Text text="Title" />
+                            </Column>
+                            <Column>
+                                <Text text="Description" />
+                            </Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true">
+                                <Text text="Start Time" />
+                            </Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true">
+                                <Text text="End Time" />
+                            </Column>
+                            <Column>
+                                <Text text="Speaker" />
+                            </Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true">
+                                <Text text="Room" />
+                            </Column>
+                            <Column>
+                                <Text text="Spots"/>
+                            </Column>
+                            <Column hAlign="End">
+                                <Text text="Edit Session"/>
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Text text="{title}" />
+                                    <Text text="{description}" />
+                                    <Text
+                                        text="{
+                                        path: 'startTime',
+                                        formatter: '.formatDateTime'
+                                    }" />
+                                    <Text
+                                        text="{
+                                        path: 'endTime',
+                                        formatter: '.formatDateTime'
+                                    }" />
+                                    <Text text="{speaker}" />
+                                    <Text text="{room}" />
+                                    <Text
+                                        text="{= ${availableSpots} + ' / ' + ${capacity}}" />
+                                    <Button 
+                                        type="Emphasized"
+                                        icon="sap-icon://request"
+                                        press=".onManageSession"
+                                    />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </Panel>
+
+            </VBox>
+        </content>
+
+    </Page>
+</mvc:View>

@@ -39,9 +39,15 @@ sap.ui.define([
                 return;
             }
 
-            const oUserModel = this.getOwnerComponent().getModel("user");
-            const sUserName  = oUserModel ? oUserModel.getProperty("/name")  : "";
-            const sEmail     = oUserModel ? oUserModel.getProperty("/email") || "" : "";
+            var oUserModel = this.getOwnerComponent().getModel("user");
+            var sEmail = oUserModel ? oUserModel.getProperty("/email") || "" : "";
+
+            if (!sEmail) {
+                var sStored = sessionStorage.getItem("loggedInUser");
+                if (sStored) {
+                    sEmail = JSON.parse(sStored).email || "";
+                }
+            }
 
             const oModel  = oView.getModel("eventService");
             const oFilter = new Filter("session_ID", FilterOperator.EQ, this._sSessionId);

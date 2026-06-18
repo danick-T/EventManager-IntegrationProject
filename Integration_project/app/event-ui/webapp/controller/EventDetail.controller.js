@@ -199,6 +199,12 @@ sap.ui.define([
                 return;
             }
 
+            var rEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!rEmail.test(sEmail.trim())) {
+                MessageBox.warning("Please enter a valid email address (e.g. name@example.com).");
+                return;
+            }
+
             // All good — create the registration
             this._createRegistration(sFirstName.trim(), sLastName.trim(), sEmail.trim());
         },
@@ -229,16 +235,29 @@ sap.ui.define([
             var oModel = this.getView().getModel();
             var that = this;
 
-            // Combine first and last name to match the userName field in schema.cds
-            var sFullName = sFirstName + " " + sLastName;
+            var oUserModel = this.getOwnerComponent().getModel("user");
+            var sUserId = oUserModel && oUserModel.getProperty("/ID");
+
+            if (!sUserId) {
+                var sStored = sessionStorage.getItem("loggedInUser");
+                if (sStored) {
+                    var oStored = JSON.parse(sStored);
+                    sUserId = oStored.ID;
+                }
+            }
+
+            if (!sUserId) {
+                MessageBox.error("You must be logged in to register.");
+                return;
+            }
 
             var oListBinding = oModel.bindList("/Registrations");
 
             oListBinding.create({
-                userName: sFullName,
-                email: sEmail,
-                registeredAt: new Date().toISOString(),
-                session_ID: this._sCurrentSessionId
+                registrationDate: new Date().toISOString(),
+                attendanceConfirmed: false,
+                session_ID: this._sCurrentSessionId,
+                user_ID: sUserId
             });
 
             oModel.submitBatch("$auto").then(function () {
@@ -291,6 +310,14 @@ sap.ui.define([
 
         isRegistrationEnabled: function (iAvailable) {
             return !!(iAvailable && iAvailable > 0);
+        },
+
+        onCreateSession: function () {
+            var oContext = this.getView().getBindingContext();
+            var sEventId = oContext.getProperty("ID");
+            this.getOwnerComponent().getRouter().navTo("createSession", {
+                eventId: encodeURIComponent(sEventId)
+            });
         },
 
         onNavBack: function () {

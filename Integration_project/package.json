@@ -32,9 +32,9 @@
       },
       "auth": {
         "kind": "mocked",
-        "restrict_all_services": true,
+        "restrict_all_services": false,
         "users": {
-          "*": false,
+          "*": true,
           "admin": {
             "password": "admin",
             "roles": [

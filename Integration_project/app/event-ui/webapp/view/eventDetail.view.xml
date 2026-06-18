@@ -9,7 +9,7 @@
                 <Panel headerText="Event Information" class="sapUiSmallMarginBottom">
                     <f:SimpleForm id="eventFrom" editable="false" layout="ResponsiveGridLayout"
                         columnsL="2" columnsM="1">
-                        <Label text="Event Name" />
+                        <Label text="Title" />
                         <Text text="{name}" />
 
                         <Label text="Description" />
@@ -39,7 +39,19 @@
                     </f:SimpleForm>
                 </Panel>
                 <Panel headerText="Sessions" class="sapUiSmallMarginBottom">
-                    <Table id="eventDetailSessionsTable" items="{sessions}" growing="true"
+                    <headerToolbar>
+                        <Toolbar>
+                            <Title text="Sessions"/>
+                            <ToolbarSpacer/>
+                            <Button
+                                text="Create Session"
+                                type="Emphasized"
+                                icon="sap-icon://add"
+                                press=".onCreateSession"
+                                visible="{= ${user>/role} === 'admin'}"/>
+                        </Toolbar>
+                    </headerToolbar>
+                    <Table class="eventDetailSessionsTable" items="{sessions}" growing="true"
                         growingThreshold="10" noDataText="No sessions available for this event.">
                         <columns>
                             <Column>
@@ -85,7 +97,7 @@
                                     <Text text="{speaker}" />
                                     <Text text="{room}" />
                                     <Text
-                                        text="{= ${availableSpots} + ' / ' + ${capacity}}" />
+                                        text="{= (${capacity} - ${availableSpots}) + ' / ' + ${capacity}}" />
                                     <Button 
                                         text="Register"
                                         type="Emphasized"

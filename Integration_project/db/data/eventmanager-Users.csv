@@ -1,3 +1,4 @@
 ID,firstName,lastName,email,role,xsuaaId
 11111111-1111-1111-1111-111111111101,Danick,Tchang,danick.Tchang@example.com,admin,user:sap.ids|danicktchang001
 11111111-1111-1111-1111-111111111102,Jan,Peeters,jan.peeters@example.com,user,user:sap.ids|janpeeters002
+11111111-1111-1111-1111-111111111103,IP2,User,ip2@flexso.com,admin,user:sap.ids|ip2user003
