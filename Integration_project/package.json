@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "dependencies": {
     "@sap/cds": "^9",
-    "@cap-js/hana": "^1",
+    "@cap-js/hana": "^2",
     "generator-easy-ui5": "^3.9.1"
   },
   "devDependencies": {
